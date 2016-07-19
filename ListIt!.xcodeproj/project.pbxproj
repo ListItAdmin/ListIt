@@ -423,6 +423,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Ollie.ListIt-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -434,6 +435,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Ollie.ListIt-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -502,6 +504,7 @@
 				5512D61A1D3E93C2008529F5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5512D61B1D3E93C2008529F5 /* Build configuration list for PBXNativeTarget "ListIt!Tests" */ = {
 			isa = XCConfigurationList;
@@ -510,6 +513,7 @@
 				5512D61D1D3E93C2008529F5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5512D61E1D3E93C2008529F5 /* Build configuration list for PBXNativeTarget "ListIt!UITests" */ = {
 			isa = XCConfigurationList;
@@ -518,6 +522,7 @@
 				5512D6201D3E93C2008529F5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
