@@ -100,9 +100,18 @@ U2gQb3dMaXN0SXRlbXM
                                     <action selector="loaddata:" destination="m5d-2k-pJS" eventType="touchUpInside" id="a7f-BM-bTY"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qg5-LH-pgv">
+                                <rect key="frame" x="78" y="217" width="71" height="30"/>
+                                <state key="normal" title="load items"/>
+                                <connections>
+                                    <action selector="loaditems:" destination="m5d-2k-pJS" eventType="touchUpInside" id="hmb-l6-wei"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hjm-dX-sIP" userLabel="First Responder" sceneMemberID="firstResponder"/>
