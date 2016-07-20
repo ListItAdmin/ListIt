@@ -69,27 +69,34 @@
     NSManagedObject *List = [NSEntityDescription insertNewObjectForEntityForName:@"items" inManagedObjectContext:context];
 
     [List setValue:[NSNumber numberWithInteger:0] forKey:@"listid"];
-    [List setValue:[NSString stringWithFormat:@"Luke Skywalker"] forKey:@"name"];
-    [List setValue:[NSString stringWithFormat:@"Description"] forKey:@"desc"];
-    [List setValue:[NSString stringWithFormat:@"Rebel"] forKey:@"faction"];
-    [List setValue:[NSString stringWithFormat:@"Blue Lightsaber"] forKey:@"weapon"];
-    [List setValue:[NSString stringWithFormat:@"Human"] forKey:@"race"];
+    [List setValue:[NSNumber numberWithInteger:0] forKey:@"itemid"];
+    [List setValue:[NSString stringWithFormat:@"tomatoes"] forKey:@"itemName"];
+    [List setValue:[NSNumber numberWithInteger:0] forKey:@"itemStatus"];
+    //[List setValue:[NSString stringWithFormat:@"Rebel"] forKey:@"faction"];
+    //[List setValue:[NSString stringWithFormat:@"Blue Lightsaber"] forKey:@"weapon"];
+    //[List setValue:[NSString stringWithFormat:@"Human"] forKey:@"race"];
     
-    NSManagedObject *List01 = [NSEntityDescription insertNewObjectForEntityForName:@"List" inManagedObjectContext:context];
-    [List01 setValue:[NSNumber numberWithInteger:1] forKey:@"listid"];
-    [List01 setValue:[NSString stringWithFormat:@"Han Solo"] forKey:@"name"];
-    [List01 setValue:[NSString stringWithFormat:@"Description"] forKey:@"desc"];
-    [List01 setValue:[NSString stringWithFormat:@"Rebel"] forKey:@"faction"];
-    [List01 setValue:[NSString stringWithFormat:@"Blaster"] forKey:@"weapon"];
-    [List01 setValue:[NSString stringWithFormat:@"Human"] forKey:@"race"];
+    NSManagedObject *List01 = [NSEntityDescription insertNewObjectForEntityForName:@"items" inManagedObjectContext:context];
     
-    NSManagedObject *List02 = [NSEntityDescription insertNewObjectForEntityForName:@"List" inManagedObjectContext:context];
-    [List02 setValue:[NSNumber numberWithInteger:2] forKey:@"listid"];
-    [List02 setValue:[NSString stringWithFormat:@"BB-8"] forKey:@"name"];
-    [List02 setValue:[NSString stringWithFormat:@"Description"] forKey:@"desc"];
-    [List02 setValue:[NSString stringWithFormat:@"Rebel"] forKey:@"faction"];
-    [List02 setValue:[NSString stringWithFormat:@"Everything"] forKey:@"weapon"];
-    [List02 setValue:[NSString stringWithFormat:@"Droid"] forKey:@"race"];
+    [List01 setValue:[NSNumber numberWithInteger:0] forKey:@"listid"];
+    [List01 setValue:[NSNumber numberWithInteger:0] forKey:@"itemid"];
+    [List01 setValue:[NSString stringWithFormat:@"tomatoes"] forKey:@"itemName"];
+    [List01 setValue:[NSNumber numberWithInteger:0] forKey:@"itemStatus"];
+    //[List01 setValue:[NSString stringWithFormat:@"Rebel"] forKey:@"faction"];
+    //[List01 setValue:[NSString stringWithFormat:@"Blue Lightsaber"] forKey:@"weapon"];
+    //[List01 setValue:[NSString stringWithFormat:@"Human"] forKey:@"race"];
+
+    NSManagedObject *List02 = [NSEntityDescription insertNewObjectForEntityForName:@"items" inManagedObjectContext:context];
+    
+    [List02 setValue:[NSNumber numberWithInteger:0] forKey:@"listid"];
+    [List02 setValue:[NSNumber numberWithInteger:0] forKey:@"itemid"];
+    [List02 setValue:[NSString stringWithFormat:@"tomatoes"] forKey:@"itemName"];
+    [List02 setValue:[NSNumber numberWithInteger:0] forKey:@"itemStatus"];
+    //[List02 setValue:[NSString stringWithFormat:@"Rebel"] forKey:@"faction"];
+    //[List02 setValue:[NSString stringWithFormat:@"Blue Lightsaber"] forKey:@"weapon"];
+    //[List02 setValue:[NSString stringWithFormat:@"Human"] forKey:@"race"];
+
+    
     
     
     NSError *error = nil;
