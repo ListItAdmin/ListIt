@@ -8,6 +8,7 @@
 
 #import "ListsViewController.h"
 #import "ListTableViewCell.h"
+#import "ItemViewController.h"
 
 @interface ListsViewController ()
 
@@ -18,6 +19,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    //set title of screen to the List Name
+    [self setTitle:@"Lists"];
+    
+    //add Edit button to Navigation button bar
+    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    
+    //allow rows to be selected during editing
+    self.tableView.allowsSelectionDuringEditing = YES;
+    
+    //change color of table view separator lines
+    [self.tableView setSeparatorColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:1]];
+    
     
     _Lists = [[NSMutableArray alloc] init];
     [_Lists addObject:@"Waterpolo"];
@@ -65,6 +79,68 @@
     
     
 }
+
+- (void) setEditing:(BOOL)editing animated:(BOOL)animated
+{
+    
+    [super setEditing:editing animated:animated];
+    [self.tableView setEditing:editing animated:animated];
+    
+}
+
+/*- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSManagedObjectContext *context = [self managedObjectContext];
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // Delete object from database
+        [context deleteObject:[self.SWNames objectAtIndex:indexPath.row]];
+        
+        NSError *error = nil;
+        if (![context save:&error]) {
+            NSLog(@"Can't Delete! %@ %@", error, [error localizedDescription]);
+            return;
+        }
+        
+        // Remove device from table view
+        [self.SWNames removeObjectAtIndex:indexPath.row];
+        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
+}*/
+
+//*******************************************
+// Pass Data to Detail View Controller
+//*******************************************
+
+/*-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    
+    if ([[segue identifier] isEqualToString:@"ShowListItems"]) {
+        
+        ItemViewController *itemviewcontroller = [segue destinationViewController];
+        
+        NSIndexPath *myIndexPath = [self.tableView indexPathForSelectedRow];
+        
+        
+        int row = [myIndexPath row];
+        
+        // NSString *selectedRow = [NSString stringWithFormat:@"%d", row];
+        
+        NSString *selectedRow = [NSString stringWithFormat:@"%@", [[self.Lists objectAtIndex:row] valueForKey:@"List Name"] ];
+        
+        NSLog(@"SELECTED ROW Char ID: %@", selectedRow);
+        // NSLog(@"SELECTED ROW Char ID: %@", [[self.SWNames objectAtIndex:row] valueForKey:@"charid"]);
+        
+        
+        itemviewcontroller.SequeData = @[selectedRow];
+        
+        //!!!!
+        itemviewcontroller.Seque_selectedRow = _selectedSWChar;
+        
+    }
+    
+    
+}*/
 
 /*
 #pragma mark - Navigation

@@ -12,4 +12,6 @@
 @property (nonatomic, strong) NSMutableArray *Items;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
+// (strong, nonatomic) NSManagedObject *Seque_selectedRow;
+
 @end
