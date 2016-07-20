@@ -94,8 +94,8 @@ U2gQb3dMaXN0SXRlbXM
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E8b-AP-Klg">
-                                <rect key="frame" x="81" y="138" width="64" height="30"/>
-                                <state key="normal" title="load data"/>
+                                <rect key="frame" x="34" y="134" width="126" height="30"/>
+                                <state key="normal" title="load list table data"/>
                                 <connections>
                                     <action selector="loaddata:" destination="m5d-2k-pJS" eventType="touchUpInside" id="a7f-BM-bTY"/>
                                 </connections>

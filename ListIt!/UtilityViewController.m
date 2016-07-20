@@ -11,6 +11,8 @@
 
 @interface UtilityViewController ()
 
+@property (strong) NSMutableArray *fetchResults;
+
 @end
 
 @implementation UtilityViewController
@@ -69,27 +71,22 @@
     
     
     [List setValue:[NSNumber numberWithInteger:0] forKey:@"listid"];
-    [List setValue:[NSString stringWithFormat:@"Luke Skywalker"] forKey:@"name"];
-    [List setValue:[NSString stringWithFormat:@"Description"] forKey:@"desc"];
-    [List setValue:[NSString stringWithFormat:@"Rebel"] forKey:@"faction"];
-    [List setValue:[NSString stringWithFormat:@"Blue Lightsaber"] forKey:@"weapon"];
-    [List setValue:[NSString stringWithFormat:@"Human"] forKey:@"race"];
+    [List setValue:[NSString stringWithFormat:@"Ralphs"] forKey:@"listName"];
+    //[List setValue:[NSString stringWithFormat:@""] forKey:@"creationDate"];
+    [List setValue:[NSString stringWithFormat:0] forKey:@"listCounter"];
     
     NSManagedObject *List01 = [NSEntityDescription insertNewObjectForEntityForName:@"List" inManagedObjectContext:context];
     [List01 setValue:[NSNumber numberWithInteger:1] forKey:@"listid"];
-    [List01 setValue:[NSString stringWithFormat:@"Han Solo"] forKey:@"name"];
-    [List01 setValue:[NSString stringWithFormat:@"Description"] forKey:@"desc"];
-    [List01 setValue:[NSString stringWithFormat:@"Rebel"] forKey:@"faction"];
-    [List01 setValue:[NSString stringWithFormat:@"Blaster"] forKey:@"weapon"];
-    [List01 setValue:[NSString stringWithFormat:@"Human"] forKey:@"race"];
+    [List01 setValue:[NSString stringWithFormat:@"Ralphs"] forKey:@"listName"];
+    //[List01 setValue:[NSString stringWithFormat:@""] forKey:@"creationDate"];
+    [List01 setValue:[NSString stringWithFormat:0] forKey:@"listCounter"];
+
     
     NSManagedObject *List02 = [NSEntityDescription insertNewObjectForEntityForName:@"List" inManagedObjectContext:context];
     [List02 setValue:[NSNumber numberWithInteger:2] forKey:@"listid"];
-    [List02 setValue:[NSString stringWithFormat:@"BB-8"] forKey:@"name"];
-    [List02 setValue:[NSString stringWithFormat:@"Description"] forKey:@"desc"];
-    [List02 setValue:[NSString stringWithFormat:@"Rebel"] forKey:@"faction"];
-    [List02 setValue:[NSString stringWithFormat:@"Everything"] forKey:@"weapon"];
-    [List02 setValue:[NSString stringWithFormat:@"Droid"] forKey:@"race"];
+    [List02 setValue:[NSString stringWithFormat:@"Ralphs"] forKey:@"listName"];
+    //[List02 setValue:[NSString stringWithFormat:@""] forKey:@"creationDate"];
+    [List02 setValue:[NSString stringWithFormat:0] forKey:@"listCounter"];
     
     
     NSError *error = nil;
@@ -120,5 +117,5 @@
     NSLog(@"Race: %@", [[self.fetchResults objectAtIndex:0] valueForKey:@"race"]);
     NSLog(@"Description: %@", [[self.fetchResults objectAtIndex:0] valueForKey:@"desc"]);
     
-
+}
 @end

@@ -3,6 +3,7 @@
     <entity name="Items" syncable="YES">
         <attribute name="creationDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="itemid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="itemName" optional="YES" syncable="YES"/>
         <attribute name="itemStatus" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="lastUseDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="listid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -14,7 +15,7 @@
         <attribute name="listName" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
+        <element name="Items" positionX="-54" positionY="18" width="128" height="135"/>
         <element name="List" positionX="-63" positionY="-18" width="128" height="105"/>
-        <element name="Items" positionX="-54" positionY="18" width="128" height="120"/>
     </elements>
 </model>
