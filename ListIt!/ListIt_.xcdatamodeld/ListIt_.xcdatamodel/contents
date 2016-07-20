@@ -3,7 +3,7 @@
     <entity name="Items" syncable="YES">
         <attribute name="creationDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="itemid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="itemName" optional="YES" syncable="YES"/>
+        <attribute name="itemName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="itemStatus" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="lastUseDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="listid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
