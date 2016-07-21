@@ -147,7 +147,7 @@ U2gQb3dMaXN0SXRlbXM
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Create New List" id="qdy-et-1Ea">
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="ptK-wJ-RaC"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="ptK-wJ-RaC"/>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
@@ -159,7 +159,7 @@ U2gQb3dMaXN0SXRlbXM
         <!--Create New Item-->
         <scene sceneID="hid-K4-3h7">
             <objects>
-                <viewController id="YTD-kR-uEN" sceneMemberID="viewController">
+                <viewController id="YTD-kR-uEN" customClass="NewItemViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jrJ-aB-2tv"/>
                         <viewControllerLayoutGuide type="bottom" id="hS7-Pd-Ejs"/>
@@ -178,10 +178,17 @@ U2gQb3dMaXN0SXRlbXM
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Create New Item" id="uWm-jt-0kd">
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="RHN-xa-ZtQ"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="RHN-xa-ZtQ">
+                            <connections>
+                                <action selector="SaveItem:" destination="YTD-kR-uEN" id="Qpj-4H-4ar"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="SaveText" destination="yBK-YY-pnf" id="zIb-a3-rDZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qFH-MZ-hrt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
