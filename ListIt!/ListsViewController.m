@@ -13,6 +13,8 @@
 
 @interface ListsViewController ()
 
+@property (strong, nonatomic) NSManagedObject *selectedList;
+
 @end
 
 @implementation ListsViewController
@@ -141,13 +143,13 @@
 }
 
 
-/*- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSManagedObjectContext *context = [self managedObjectContext];
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete object from database
-        [context deleteObject:[self.SWNames objectAtIndex:indexPath.row]];
+        [context deleteObject:[self.Lists objectAtIndex:indexPath.row]];
         
         NSError *error = nil;
         if (![context save:&error]) {
@@ -156,16 +158,44 @@
         }
         
         // Remove device from table view
-        [self.SWNames removeObjectAtIndex:indexPath.row];
+        [self.Lists removeObjectAtIndex:indexPath.row];
         [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
-}*/
+}
 
 //*******************************************
-// Pass Data to Detail View Controller
+// User Select-a-row
+//*******************************************
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    //!!!!!!
+    NSManagedObject *selectedRow = [self.Lists objectAtIndex:indexPath.row];
+    // save selected list item to pass to Update view contoller
+    _selectedList = selectedRow;
+    
+    NSLog(@"******SELECTED ROW: %@",[_selectedList valueForKey:@"listName"]);
+    
+    
+    
+    //!!!!!!!!!
+    //NSString *nameSelected = [_InterestingNames objectAtIndex:indexPath.row];
+    
+    //NSString *msg = [NSString stringWithFormat:@"You have selected %@", nameSelected];
+    //UIAlertView *alert =[[UIAlertView alloc] initWithTitle:@"Player selected" message:msg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    
+    //[alert show];
+    
+    //!!!!!!!
+    //UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    //[self performSegueWithIdentifier:@"ShowDetail" sender:cell];
+}
+
+
+//*******************************************
+// Pass Data to Items View Controller
 //*******************************************
 
-/*-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     
     if ([[segue identifier] isEqualToString:@"ShowListItems"]) {
@@ -179,7 +209,7 @@
         
         // NSString *selectedRow = [NSString stringWithFormat:@"%d", row];
         
-        NSString *selectedRow = [NSString stringWithFormat:@"%@", [[self.Lists objectAtIndex:row] valueForKey:@"List Name"] ];
+        NSString *selectedRow = [NSString stringWithFormat:@"%@", [[self.Lists objectAtIndex:row] valueForKey:@"ListName"] ];
         
         NSLog(@"SELECTED ROW Char ID: %@", selectedRow);
         // NSLog(@"SELECTED ROW Char ID: %@", [[self.SWNames objectAtIndex:row] valueForKey:@"charid"]);
@@ -188,12 +218,12 @@
         itemviewcontroller.SequeData = @[selectedRow];
         
         //!!!!
-        itemviewcontroller.Seque_selectedRow = _selectedSWChar;
+        itemviewcontroller.Seque_selectedRow = _selectedList;
         
     }
     
     
-}*/
+}
 
 /*
 #pragma mark - Navigation

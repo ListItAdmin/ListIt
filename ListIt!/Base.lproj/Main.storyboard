@@ -121,7 +121,7 @@ U2gQb3dMaXN0SXRlbXM
         <!--Create New List-->
         <scene sceneID="E9Q-VN-1gF">
             <objects>
-                <viewController id="OqF-cX-m6W" sceneMemberID="viewController">
+                <viewController id="OqF-cX-m6W" customClass="NewListViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="3hu-G9-Po1"/>
                         <viewControllerLayoutGuide type="bottom" id="wok-sT-XX3"/>
@@ -130,7 +130,7 @@ U2gQb3dMaXN0SXRlbXM
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Sample Text" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y5U-MI-bHl">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="New List" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y5U-MI-bHl">
                                 <rect key="frame" x="39" y="117" width="243" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="34"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -140,10 +140,17 @@ U2gQb3dMaXN0SXRlbXM
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Create New List" id="qdy-et-1Ea">
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="ptK-wJ-RaC"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="ptK-wJ-RaC">
+                            <connections>
+                                <action selector="Save:" destination="OqF-cX-m6W" id="nHa-hN-fOR"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="NewList" destination="Y5U-MI-bHl" id="lLc-qb-fbw"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xcG-YM-bqV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

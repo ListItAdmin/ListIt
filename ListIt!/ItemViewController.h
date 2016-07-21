@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
 
 @interface ItemViewController : UIViewController
 @property (nonatomic, strong) NSMutableArray *Items;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
-// (strong, nonatomic) NSManagedObject *Seque_selectedRow;
+@property (strong, nonatomic) NSManagedObject *Seque_selectedRow;
+@property (strong, nonatomic) NSArray *SequeData;
 
 @end

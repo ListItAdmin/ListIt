@@ -21,6 +21,7 @@
 		94EA2A671D3FE84A0042E977 /* ItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94EA2A661D3FE84A0042E977 /* ItemViewController.m */; };
 		94EA2A6A1D3FE9D60042E977 /* ItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94EA2A691D3FE9D60042E977 /* ItemTableViewCell.m */; };
 		94EA2A6D1D400ECF0042E977 /* UtilityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94EA2A6C1D400ECF0042E977 /* UtilityViewController.m */; };
+		94EA2A701D4142A50042E977 /* NewListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94EA2A6F1D4142A50042E977 /* NewListViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,8 @@
 		94EA2A691D3FE9D60042E977 /* ItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemTableViewCell.m; sourceTree = "<group>"; };
 		94EA2A6B1D400ECF0042E977 /* UtilityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilityViewController.h; sourceTree = "<group>"; };
 		94EA2A6C1D400ECF0042E977 /* UtilityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UtilityViewController.m; sourceTree = "<group>"; };
+		94EA2A6E1D4142A50042E977 /* NewListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewListViewController.h; sourceTree = "<group>"; };
+		94EA2A6F1D4142A50042E977 /* NewListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewListViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +133,8 @@
 				94EA2A661D3FE84A0042E977 /* ItemViewController.m */,
 				94EA2A681D3FE9D60042E977 /* ItemTableViewCell.h */,
 				94EA2A691D3FE9D60042E977 /* ItemTableViewCell.m */,
+				94EA2A6E1D4142A50042E977 /* NewListViewController.h */,
+				94EA2A6F1D4142A50042E977 /* NewListViewController.m */,
 				94EA2A6B1D400ECF0042E977 /* UtilityViewController.h */,
 				94EA2A6C1D400ECF0042E977 /* UtilityViewController.m */,
 				5512D5F41D3E93C2008529F5 /* Main.storyboard */,
@@ -305,6 +310,7 @@
 				94EA2A671D3FE84A0042E977 /* ItemViewController.m in Sources */,
 				94EA2A6D1D400ECF0042E977 /* UtilityViewController.m in Sources */,
 				94EA2A641D3EB7140042E977 /* ListTableViewCell.m in Sources */,
+				94EA2A701D4142A50042E977 /* NewListViewController.m in Sources */,
 				5512D5F01D3E93C2008529F5 /* AppDelegate.m in Sources */,
 				5512D5ED1D3E93C2008529F5 /* main.m in Sources */,
 			);
