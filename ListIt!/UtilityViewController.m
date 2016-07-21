@@ -118,7 +118,7 @@
     
     
     // set up data
-    NSManagedObject *List = [NSEntityDescription insertNewObjectForEntityForName:@"items" inManagedObjectContext:context];
+    NSManagedObject *List = [NSEntityDescription insertNewObjectForEntityForName:@"Items" inManagedObjectContext:context];
     
     [List setValue:[NSNumber numberWithInteger:0] forKey:@"listid"];
     [List setValue:[NSNumber numberWithInteger:0] forKey:@"itemid"];
@@ -128,25 +128,60 @@
     //[List setValue:[NSString stringWithFormat:@"Blue Lightsaber"] forKey:@"weapon"];
     //[List setValue:[NSString stringWithFormat:@"Human"] forKey:@"race"];
     
-    NSManagedObject *List01 = [NSEntityDescription insertNewObjectForEntityForName:@"items" inManagedObjectContext:context];
+    NSManagedObject *List01 = [NSEntityDescription insertNewObjectForEntityForName:@"Items" inManagedObjectContext:context];
     
     [List01 setValue:[NSNumber numberWithInteger:0] forKey:@"listid"];
-    [List01 setValue:[NSNumber numberWithInteger:0] forKey:@"itemid"];
-    [List01 setValue:[NSString stringWithFormat:@"tomatoes"] forKey:@"itemName"];
-    [List01 setValue:[NSNumber numberWithInteger:0] forKey:@"itemStatus"];
+    [List01 setValue:[NSNumber numberWithInteger:1] forKey:@"itemid"];
+    [List01 setValue:[NSString stringWithFormat:@"carrots"] forKey:@"itemName"];
+    [List01 setValue:[NSNumber numberWithInteger:2] forKey:@"itemStatus"];
     //[List01 setValue:[NSString stringWithFormat:@"Rebel"] forKey:@"faction"];
     //[List01 setValue:[NSString stringWithFormat:@"Blue Lightsaber"] forKey:@"weapon"];
     //[List01 setValue:[NSString stringWithFormat:@"Human"] forKey:@"race"];
     
-    NSManagedObject *List02 = [NSEntityDescription insertNewObjectForEntityForName:@"items" inManagedObjectContext:context];
+    NSManagedObject *List02 = [NSEntityDescription insertNewObjectForEntityForName:@"Items" inManagedObjectContext:context];
     
     [List02 setValue:[NSNumber numberWithInteger:0] forKey:@"listid"];
-    [List02 setValue:[NSNumber numberWithInteger:0] forKey:@"itemid"];
-    [List02 setValue:[NSString stringWithFormat:@"tomatoes"] forKey:@"itemName"];
-    [List02 setValue:[NSNumber numberWithInteger:0] forKey:@"itemStatus"];
+    [List02 setValue:[NSNumber numberWithInteger:2] forKey:@"itemid"];
+    [List02 setValue:[NSString stringWithFormat:@"fedoras"] forKey:@"itemName"];
+    [List02 setValue:[NSNumber numberWithInteger:1] forKey:@"itemStatus"];
     //[List02 setValue:[NSString stringWithFormat:@"Rebel"] forKey:@"faction"];
     //[List02 setValue:[NSString stringWithFormat:@"Blue Lightsaber"] forKey:@"weapon"];
     //[List02 setValue:[NSString stringWithFormat:@"Human"] forKey:@"race"];
+    
+    
+    
+    
+    NSError *error = nil;
+    // Save the object to persistent store
+    if (![context save:&error]) {
+        NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+    }
+    
+    
+    //read from database
+    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Items"];
+    self.fetchResults = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+    
+    //NSPredicate *pred = [NSPredicate predicateWithFormat:@"(charid == 1)"];
+    
+    //[fetchRequest setPredicate:pred];
+    
+    self.fetchResults = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+    
+    NSLog(@"Number of Records Found: %lu", (unsigned long)[self.fetchResults count]);
+    NSLog(@"Retrieved record: %@", self.fetchResults[0]);
+    NSLog(@"Retrieved record: %@", self.fetchResults[1]);
+    NSLog(@"Retrieved record: %@", self.fetchResults[2]);
+    //NSLog(@"List ID: %@", [[self.fetchResults objectAtIndex:0] valueForKey:@"listid"]);
+    //NSLog(@"Item ID: %@", [[self.fetchResults objectAtIndex:0] valueForKey:@"itemid"]);
+    //NSLog(@"Item Name: %@", [[self.fetchResults objectAtIndex:0] valueForKey:@"itemName"]);
+    //NSLog(@"itemStatus: %@", [[self.fetchResults objectAtIndex:0] valueForKey:@"itemStatus"]);
+    //NSLog(@"Race: %@", [[self.fetchResults objectAtIndex:0] valueForKey:@"race"]);
+    //NSLog(@"Description: %@", [[self.fetchResults objectAtIndex:0] valueForKey:@"desc"]);
+
+    
 }
 
 @end

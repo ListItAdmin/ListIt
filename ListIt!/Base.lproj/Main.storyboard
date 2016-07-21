@@ -94,17 +94,24 @@ U2gQb3dMaXN0SXRlbXM
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E8b-AP-Klg">
-                                <rect key="frame" x="34" y="134" width="126" height="30"/>
+                                <rect key="frame" x="47" y="106" width="126" height="30"/>
                                 <state key="normal" title="load list table data"/>
                                 <connections>
                                     <action selector="loaddata:" destination="m5d-2k-pJS" eventType="touchUpInside" id="a7f-BM-bTY"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qg5-LH-pgv">
-                                <rect key="frame" x="78" y="217" width="71" height="30"/>
+                                <rect key="frame" x="48" y="181" width="71" height="30"/>
                                 <state key="normal" title="load items"/>
                                 <connections>
                                     <action selector="loaditems:" destination="m5d-2k-pJS" eventType="touchUpInside" id="hmb-l6-wei"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xlu-ll-baa">
+                                <rect key="frame" x="48" y="262" width="77" height="30"/>
+                                <state key="normal" title="go to items"/>
+                                <connections>
+                                    <segue destination="ywy-dx-6D0" kind="show" id="IVK-1w-dye"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -116,7 +123,7 @@ U2gQb3dMaXN0SXRlbXM
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hjm-dX-sIP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1263" y="1466"/>
+            <point key="canvasLocation" x="837" y="1492"/>
         </scene>
         <!--Create New List-->
         <scene sceneID="E9Q-VN-1gF">
@@ -159,7 +166,7 @@ U2gQb3dMaXN0SXRlbXM
         <!--Create New Item-->
         <scene sceneID="hid-K4-3h7">
             <objects>
-                <viewController id="YTD-kR-uEN" sceneMemberID="viewController">
+                <viewController id="YTD-kR-uEN" customClass="NewItemViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jrJ-aB-2tv"/>
                         <viewControllerLayoutGuide type="bottom" id="hS7-Pd-Ejs"/>
@@ -178,10 +185,17 @@ U2gQb3dMaXN0SXRlbXM
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Create New Item" id="uWm-jt-0kd">
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="RHN-xa-ZtQ"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="RHN-xa-ZtQ">
+                            <connections>
+                                <action selector="SaveItem:" destination="YTD-kR-uEN" id="Qpj-4H-4ar"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="SaveText" destination="yBK-YY-pnf" id="zIb-a3-rDZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qFH-MZ-hrt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -275,4 +289,7 @@ U2gQb3dMaXN0SXRlbXM
             <point key="canvasLocation" x="440" y="721"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="IVK-1w-dye"/>
+    </inferredMetricsTieBreakers>
 </document>
