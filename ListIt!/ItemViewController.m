@@ -8,6 +8,7 @@
 
 #import "ItemViewController.h"
 #import "ItemTableViewCell.h"
+#import <CoreData/CoreData.h>
 
 @interface ItemViewController ()
 
@@ -15,14 +16,36 @@
 
 @implementation ItemViewController
 
+
+//***********************************************************************
+// Setup ManagedObjectContext to access core data
+//***********************************************************************
+- (NSManagedObjectContext *)managedObjectContext
+{
+    
+    NSManagedObjectContext *context = nil;
+    id delegate = [[UIApplication sharedApplication] delegate];
+    if ([delegate performSelector:@selector(managedObjectContext)]) {
+        context = [delegate managedObjectContext];
+    }
+    return context;
+    
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
     
-    _Items = [[NSMutableArray alloc] init];
-    [_Items addObject:@"Something Different"];
-    [_Items addObject:@"Softball"];
-    [_Items addObject:@"League of Geometry --- It's a math game"];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Items"];
+    
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"(listid == 0)"];
+    
+    [fetchRequest setPredicate:pred];
+    self.Items = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+    
+    NSLog(@"Self.Items: %@", self.Items);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -39,15 +62,16 @@
     
     int row = [indexPath row];
     
-    cell.ItemName.text= _Items[row];
+    //cell.ListName.text= _Lists[row];
     
-    //NSManagedObject *listitem = [self.SWNames objectAtIndex:indexPath.row];
+    NSManagedObject *listitem = [self.Items objectAtIndex:indexPath.row];
     
-    //[cell.Name setText:[NSString stringWithFormat:@"%@", [listitem valueForKey:@"name"]]];
+    [cell.ItemName setText:[NSString stringWithFormat:@"%@", [listitem valueForKey:@"itemName"]]];
     
     //NSString *checkmark = _Checked[row];
     
-    //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
     
     return cell;
 }
