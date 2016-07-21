@@ -9,12 +9,28 @@
 #import "ListsViewController.h"
 #import "ListTableViewCell.h"
 #import "ItemViewController.h"
+#import <CoreData/CoreData.h>
 
 @interface ListsViewController ()
 
 @end
 
 @implementation ListsViewController
+
+//***********************************************************************
+// Setup ManagedObjectContext to access core data
+//***********************************************************************
+- (NSManagedObjectContext *)managedObjectContext
+{
+    
+    NSManagedObjectContext *context = nil;
+    id delegate = [[UIApplication sharedApplication] delegate];
+    if ([delegate performSelector:@selector(managedObjectContext)]) {
+        context = [delegate managedObjectContext];
+    }
+    return context;
+    
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -33,10 +49,31 @@
     [self.tableView setSeparatorColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:1]];
     
     
-    _Lists = [[NSMutableArray alloc] init];
-    [_Lists addObject:@"Waterpolo"];
-    [_Lists addObject:@"Baseball"];
-    [_Lists addObject:@"League of Angles --- It's a math game"];
+    
+    //_Lists = [[NSMutableArray alloc] init];
+    //[_Lists addObject:@"Waterpolo"];
+    //[_Lists addObject:@"Baseball"];
+    //[_Lists addObject:@"League of Angles --- It's a math game"];
+    
+    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"List"];
+    self.Lists = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+    
+    NSLog(@"Self.Lists: %@", self.Lists);
+    
+    
+    
+}
+
+//***********************************************************************
+// Executes everytime the view is shown
+//***********************************************************************
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    // Do any additional setup after loading the view.
+    
+    [self loadTableView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -53,15 +90,15 @@
     
     int row = [indexPath row];
     
-    cell.ListName.text= _Lists[row];
+    //cell.ListName.text= _Lists[row];
     
-    //NSManagedObject *listitem = [self.SWNames objectAtIndex:indexPath.row];
+    NSManagedObject *listitem = [self.Lists objectAtIndex:indexPath.row];
     
-    //[cell.Name setText:[NSString stringWithFormat:@"%@", [listitem valueForKey:@"name"]]];
+    [cell.ListName setText:[NSString stringWithFormat:@"%@", [listitem valueForKey:@"listName"]]];
     
     //NSString *checkmark = _Checked[row];
     
-    //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     return cell;
 }
@@ -87,6 +124,22 @@
     [self.tableView setEditing:editing animated:animated];
     
 }
+
+- (void)loadTableView
+{
+    
+    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"List"];
+    self.Lists = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+    
+    NSLog(@"Self.Lists: %@", self.Lists);
+    
+    [self.tableView reloadData];
+    
+    
+}
+
 
 /*- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {

@@ -55,12 +55,6 @@
 
 - (IBAction)loaddata:(UIButton *)sender {
     
-    
-    
-}
-
-- (IBAction)loaditems:(UIButton *)sender {
-    
     // setup database connection
     NSManagedObjectContext *context = [self managedObjectContext];
     
@@ -156,13 +150,6 @@
     [List01 setValue:[NSString stringWithFormat:0] forKey:@"listCounter"];
 
     
-    NSManagedObject *List02 = [NSEntityDescription insertNewObjectForEntityForName:@"List" inManagedObjectContext:context];
-    [List02 setValue:[NSNumber numberWithInteger:2] forKey:@"listid"];
-    [List02 setValue:[NSString stringWithFormat:@"Ralphs"] forKey:@"listName"];
-    //[List02 setValue:[NSString stringWithFormat:@""] forKey:@"creationDate"];
-    [List02 setValue:[NSString stringWithFormat:0] forKey:@"listCounter"];
-    
-    
     NSError *error = nil;
     // Save the object to persistent store
     if (![context save:&error]) {
@@ -180,7 +167,7 @@
     
     //[fetchRequest setPredicate:pred];
     
-    self.fetchResults = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+    /*self.fetchResults = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
     
     NSLog(@"Number of Records Found: %lu", (unsigned long)[self.fetchResults count]);
     NSLog(@"Retrieved record: %@", self.fetchResults[0]);
@@ -189,8 +176,47 @@
     NSLog(@"Faction: %@", [[self.fetchResults objectAtIndex:0] valueForKey:@"faction"]);
     NSLog(@"Weapon: %@", [[self.fetchResults objectAtIndex:0] valueForKey:@"weapon"]);
     NSLog(@"Race: %@", [[self.fetchResults objectAtIndex:0] valueForKey:@"race"]);
-    NSLog(@"Description: %@", [[self.fetchResults objectAtIndex:0] valueForKey:@"desc"]);
+    NSLog(@"Description: %@", [[self.fetchResults objectAtIndex:0] valueForKey:@"desc"]);*/
+
     
+}
+
+- (IBAction)loaditems:(UIButton *)sender {
+    
+    // setup database connection
+    NSManagedObjectContext *context = [self managedObjectContext];
+    
+    
+    // set up data
+    NSManagedObject *List = [NSEntityDescription insertNewObjectForEntityForName:@"items" inManagedObjectContext:context];
+    
+    [List setValue:[NSNumber numberWithInteger:0] forKey:@"listid"];
+    [List setValue:[NSNumber numberWithInteger:0] forKey:@"itemid"];
+    [List setValue:[NSString stringWithFormat:@"tomatoes"] forKey:@"itemName"];
+    [List setValue:[NSNumber numberWithInteger:0] forKey:@"itemStatus"];
+    //[List setValue:[NSString stringWithFormat:@"Rebel"] forKey:@"faction"];
+    //[List setValue:[NSString stringWithFormat:@"Blue Lightsaber"] forKey:@"weapon"];
+    //[List setValue:[NSString stringWithFormat:@"Human"] forKey:@"race"];
+    
+    NSManagedObject *List01 = [NSEntityDescription insertNewObjectForEntityForName:@"items" inManagedObjectContext:context];
+    
+    [List01 setValue:[NSNumber numberWithInteger:0] forKey:@"listid"];
+    [List01 setValue:[NSNumber numberWithInteger:0] forKey:@"itemid"];
+    [List01 setValue:[NSString stringWithFormat:@"tomatoes"] forKey:@"itemName"];
+    [List01 setValue:[NSNumber numberWithInteger:0] forKey:@"itemStatus"];
+    //[List01 setValue:[NSString stringWithFormat:@"Rebel"] forKey:@"faction"];
+    //[List01 setValue:[NSString stringWithFormat:@"Blue Lightsaber"] forKey:@"weapon"];
+    //[List01 setValue:[NSString stringWithFormat:@"Human"] forKey:@"race"];
+    
+    NSManagedObject *List02 = [NSEntityDescription insertNewObjectForEntityForName:@"items" inManagedObjectContext:context];
+    
+    [List02 setValue:[NSNumber numberWithInteger:0] forKey:@"listid"];
+    [List02 setValue:[NSNumber numberWithInteger:0] forKey:@"itemid"];
+    [List02 setValue:[NSString stringWithFormat:@"tomatoes"] forKey:@"itemName"];
+    [List02 setValue:[NSNumber numberWithInteger:0] forKey:@"itemStatus"];
+    //[List02 setValue:[NSString stringWithFormat:@"Rebel"] forKey:@"faction"];
+    //[List02 setValue:[NSString stringWithFormat:@"Blue Lightsaber"] forKey:@"weapon"];
+    //[List02 setValue:[NSString stringWithFormat:@"Human"] forKey:@"race"];
 }
 
 @end
