@@ -122,6 +122,8 @@
     
     [cell.ItemName setText:[NSString stringWithFormat:@"%@", [listitem valueForKey:@"itemName"]]];
     
+    cell.ItemImage.image = [UIImage imageNamed:@"checkmark.png"];
+    
     //NSString *checkmark = _Checked[row];
     
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
