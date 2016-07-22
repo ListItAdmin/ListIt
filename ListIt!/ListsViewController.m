@@ -83,6 +83,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+//load data into table view
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"ListName";
@@ -97,6 +98,8 @@
     NSManagedObject *listitem = [self.Lists objectAtIndex:indexPath.row];
     
     [cell.ListName setText:[NSString stringWithFormat:@"%@", [listitem valueForKey:@"listName"]]];
+    [cell.ListID setText:[NSString stringWithFormat:@"%@", [listitem valueForKey:@"listid"]]];
+
     
     //NSString *checkmark = _Checked[row];
     
@@ -194,11 +197,10 @@
 //*******************************************
 // Pass Data to Items View Controller
 //*******************************************
-
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     
-    if ([[segue identifier] isEqualToString:@"ShowListItems"]) {
+    if ([[segue identifier] isEqualToString:@"Same"]) {
         
         ItemViewController *itemviewcontroller = [segue destinationViewController];
         
@@ -207,18 +209,19 @@
         
         int row = [myIndexPath row];
         
-        // NSString *selectedRow = [NSString stringWithFormat:@"%d", row];
-        
-        NSString *selectedRow = [NSString stringWithFormat:@"%@", [[self.Lists objectAtIndex:row] valueForKey:@"ListName"] ];
-        
-        NSLog(@"SELECTED ROW Char ID: %@", selectedRow);
-        // NSLog(@"SELECTED ROW Char ID: %@", [[self.SWNames objectAtIndex:row] valueForKey:@"charid"]);
+        NSString *selectedRow = [NSString stringWithFormat:@"%d", row];
         
         
-        itemviewcontroller.SequeData = @[selectedRow];
+        // ListTableCell *cell = [self.tableView cellForRowAtIndexPath:myIndexPath];
         
-        //!!!!
-        itemviewcontroller.Seque_selectedRow = _selectedList;
+        
+        ListTableViewCell *cell = [self.tableView cellForRowAtIndexPath:myIndexPath];
+        
+        NSLog(@"List Name: %@", cell.ListName.text);
+        NSLog(@"List ID: %@", cell.ListID.text);
+        
+        
+        itemviewcontroller.SequeData = @[cell.ListName.text, cell.ListID.text];
         
     }
     

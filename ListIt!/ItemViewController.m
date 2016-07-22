@@ -9,6 +9,7 @@
 #import "ItemViewController.h"
 #import "ItemTableViewCell.h"
 #import <CoreData/CoreData.h>
+#import "NewItemViewController.h"
 
 @interface ItemViewController ()
 
@@ -38,14 +39,66 @@
     // Do any additional setup after loading the view.
     NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
     
+    //set title of screen to the List Name
+    [self setTitle:@"Items"];
+    
+    //add Edit button to Navigation button bar
+    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    
+    //allow rows to be selected during editing
+    self.tableView.allowsSelectionDuringEditing = YES;
+    
+    //change color of table view separator lines
+    [self.tableView setSeparatorColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:1]];
+    
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Items"];
     
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"(listid == 0)"];
+    NSString *listid = [NSString stringWithFormat:@"(listid == %@)", _SequeData[1]];
+    NSPredicate *pred = [NSPredicate predicateWithFormat:listid];
     
     [fetchRequest setPredicate:pred];
     self.Items = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
     
     NSLog(@"Self.Items: %@", self.Items);
+    NSLog(@"segue data: %@, %@", _SequeData[0], _SequeData[1]);
+}
+
+//***********************************************************************
+// Executes everytime the view is shown
+//***********************************************************************
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    // Do any additional setup after loading the view.
+    
+    [self loadTableView];
+}
+
+- (void)loadTableView
+{
+    
+    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Items"];
+    
+    NSString *listid = [NSString stringWithFormat:@"(listid == %@)", _SequeData[1]];
+    NSPredicate *pred = [NSPredicate predicateWithFormat:listid];
+    
+    [fetchRequest setPredicate:pred];
+    self.Items = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+    
+    NSLog(@"Self.Items: %@", self.Items);
+    
+    [self.tableView reloadData];
+    
+    
+}
+
+- (void) setEditing:(BOOL)editing animated:(BOOL)animated
+{
+    
+    [super setEditing:editing animated:animated];
+    [self.tableView setEditing:editing animated:animated];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -53,6 +106,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+//load data into table view
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"ItemName";
@@ -76,6 +130,27 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSManagedObjectContext *context = [self managedObjectContext];
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // Delete object from database
+        [context deleteObject:[self.Items objectAtIndex:indexPath.row]];
+        
+        NSError *error = nil;
+        if (![context save:&error]) {
+            NSLog(@"Can't Delete! %@ %@", error, [error localizedDescription]);
+            return;
+        }
+        
+        // Remove device from table view
+        [self.Items removeObjectAtIndex:indexPath.row];
+        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
+}
+
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
@@ -90,6 +165,22 @@
     
 }
 
+//*******************************************
+// Pass Data to Items View Controller
+//*******************************************
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    
+    //if ([[segue identifier] isEqualToString:@"ShowListItems"]) {
+    
+    NewItemViewController *newitemviewcontroller = [segue destinationViewController];
+    
+    newitemviewcontroller.SequeData = @[_SequeData[1]];
+    
+    //}
+    
+    
+}
 
 
 
@@ -103,4 +194,9 @@
 }
 */
 
+- (IBAction)Back:(UIBarButtonItem *)sender {
+    
+    [self.navigationController popViewControllerAnimated:YES];
+    
+}
 @end

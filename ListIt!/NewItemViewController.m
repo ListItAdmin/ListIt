@@ -9,6 +9,7 @@
 #import "NewItemViewController.h"
 #import <CoreData/CoreData.h>
 @interface NewItemViewController ()
+
 @property (strong) NSMutableArray *fetchResults;
 
 @end
@@ -35,6 +36,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    NSLog(@"list id: %@", _SequeData[0]);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -60,9 +63,12 @@
     // set up data
     NSManagedObject *List = [NSEntityDescription insertNewObjectForEntityForName:@"Items" inManagedObjectContext:context];
     
-    [List setValue:[NSNumber numberWithInteger:0] forKey:@"listid"];
+    NSString *string = _SequeData[0];
+    NSInteger number=[string intValue];
+    
+    [List setValue:[NSNumber numberWithInteger:number] forKey:@"listid"];
     [List setValue:[NSNumber numberWithInteger:[Test intValue]] forKey:@"itemid"];
-    [List setValue:[NSString stringWithFormat:@"%@l", self.SaveText.text] forKey:@"itemName"];
+    [List setValue:[NSString stringWithFormat:@"%@", self.SaveText.text] forKey:@"itemName"];
 
     NSError *error = nil;
     // Save the object to persistent store

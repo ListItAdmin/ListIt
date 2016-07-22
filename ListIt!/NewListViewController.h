@@ -11,5 +11,6 @@
 @interface NewListViewController : UIViewController
 - (IBAction)Save:(UIBarButtonItem *)sender;
 @property (weak, nonatomic) IBOutlet UITextField *NewList;
+@property (strong, nonatomic) NSArray *SequeData;
 
 @end

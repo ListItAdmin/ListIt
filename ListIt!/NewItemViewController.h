@@ -11,5 +11,6 @@
 @interface NewItemViewController : UIViewController
 - (IBAction)SaveItem:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextField *SaveText;
+@property (strong, nonatomic) NSArray *SequeData;
 
 @end

@@ -14,5 +14,6 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSManagedObject *Seque_selectedRow;
 @property (strong, nonatomic) NSArray *SequeData;
+- (IBAction)Back:(UIBarButtonItem *)sender;
 
 @end

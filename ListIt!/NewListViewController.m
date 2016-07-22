@@ -64,40 +64,28 @@
     //!!!!
     
     
-    /*if ([_SequeData[0] isEqualToString:@"Update"]) {
+    if ([_SequeData[0] isEqualToString:@"ShowUpdateList"]) {
         
         //update core data
         
-        NSLog(@"New name: %@", self.Name.text);
-        [_Seque_selectedRow setValue:self.Name.text forKey:@"name"];
-        [_Seque_selectedRow setValue:self.Description.text forKey:@"desc"];
-        [_Seque_selectedRow setValue:self.Faction.text forKey:@"faction"];
-        [_Seque_selectedRow setValue:self.Weapon.text forKey:@"weapon"];
-        [_Seque_selectedRow setValue:self.Race.text forKey:@"race"];
-        
-        
-        
+        NSLog(@"SequeData[0] = %@", _SequeData[0]);
+        NSLog(@"New name: %@", self.NewList.text);
+        [_SequeData[0] setValue:self.NewList.text forKey:@"name"];
     } else {
-        NSManagedObject *SWChar = [NSEntityDescription insertNewObjectForEntityForName:@"SWChar" inManagedObjectContext:context];
+        NSManagedObject *List = [NSEntityDescription insertNewObjectForEntityForName:@"List" inManagedObjectContext:context];
         
-        NSNumber *Test = [self TheRealGoGetIt];
+        NSNumber *Test = [self GoGetIt];
         
-        [SWChar setValue:[NSNumber numberWithInteger: [Test intValue]] forKey:@"charid"];
-        [SWChar setValue:[NSString stringWithFormat:@"%@", self.Name.text] forKey:@"name"];
-        [SWChar setValue:[NSString stringWithFormat:@"%@", self.Description.text] forKey:@"desc"];
-        [SWChar setValue:[NSString stringWithFormat:@"%@", self.Faction.text] forKey:@"faction"];
-        [SWChar setValue:[NSString stringWithFormat:@"%@", self.Weapon.text] forKey:@"weapon"];
-        [SWChar setValue:[NSString stringWithFormat:@"%@", self.Race.text] forKey:@"race"];
-        
-        
-    }*/
+        [List setValue:[NSNumber numberWithInteger: [Test intValue]] forKey:@"listid"];
+        [List setValue:[NSString stringWithFormat:@"%@", self.NewList.text] forKey:@"listName"];
+    }
     
-    NSManagedObject *List = [NSEntityDescription insertNewObjectForEntityForName:@"List" inManagedObjectContext:context];
+    /*NSManagedObject *List = [NSEntityDescription insertNewObjectForEntityForName:@"List" inManagedObjectContext:context];
     
     NSNumber *Test = [self GoGetIt];
     
     [List setValue:[NSNumber numberWithInteger: [Test intValue]] forKey:@"listid"];
-    [List setValue:[NSString stringWithFormat:@"%@", self.NewList.text] forKey:@"listName"];
+    [List setValue:[NSString stringWithFormat:@"%@", self.NewList.text] forKey:@"listName"];*/
     
     NSError *error = nil;
     // Save the object to persistent store
