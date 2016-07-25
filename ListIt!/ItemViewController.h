@@ -11,6 +11,7 @@
 
 @interface ItemViewController : UIViewController
 @property (nonatomic, strong) NSMutableArray *Items;
+@property (nonatomic, strong) NSMutableArray *blankItems;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSManagedObject *Seque_selectedRow;
 @property (strong, nonatomic) NSArray *SequeData;
