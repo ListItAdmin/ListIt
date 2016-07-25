@@ -302,7 +302,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="wm2-hJ-aOp"/>
         <segue reference="EbV-t9-Rg6"/>
+        <segue reference="wm2-hJ-aOp"/>
     </inferredMetricsTieBreakers>
 </document>

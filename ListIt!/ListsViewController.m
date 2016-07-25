@@ -9,11 +9,14 @@
 #import "ListsViewController.h"
 #import "ListTableViewCell.h"
 #import "ItemViewController.h"
+#import "NewListViewController.h"
 #import <CoreData/CoreData.h>
 
 @interface ListsViewController ()
 
 @property (strong, nonatomic) NSManagedObject *selectedList;
+@property (strong) NSMutableArray *fetchResults;
+@property (strong) UITableViewCell *cell;
 
 @end
 
@@ -74,6 +77,10 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     // Do any additional setup after loading the view.
+    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"List"];
+    self.fetchResults = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
     
     [self loadTableView];
 }
@@ -174,8 +181,8 @@
     //!!!!!!
     if(self.tableView.isEditing){
         
-        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-        [self performSegueWithIdentifier:@"ShowUpdateList" sender:cell];
+        self.cell = [self.tableView cellForRowAtIndexPath:indexPath];
+        [self performSegueWithIdentifier:@"ShowUpdateList" sender:_cell];
         
     } else {
         
@@ -185,8 +192,8 @@
         
         NSLog(@"******SELECTED ROW: %@",[_selectedList valueForKey:@"listName"]);
         
-        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-        [self performSegueWithIdentifier:@"Same" sender:cell];
+        self.cell = [self.tableView cellForRowAtIndexPath:indexPath];
+        //[self performSegueWithIdentifier:@"Same" sender:cell];
     }
 
 }
@@ -210,9 +217,6 @@
         NSString *selectedRow = [NSString stringWithFormat:@"%d", row];
         
         
-        // ListTableCell *cell = [self.tableView cellForRowAtIndexPath:myIndexPath];
-        
-        
         ListTableViewCell *cell = [self.tableView cellForRowAtIndexPath:myIndexPath];
         
         NSLog(@"List Name: %@", cell.ListName.text);
@@ -220,9 +224,20 @@
         
         
         itemviewcontroller.SequeData = @[cell.ListName.text, cell.ListID.text];
+    } else if ([[segue identifier] isEqualToString:@"ShowUpdateList"]){
         
+        NSIndexPath *myIndexPath = [self.tableView indexPathForSelectedRow];
+        ListTableViewCell *cell = [self.tableView cellForRowAtIndexPath:myIndexPath];
+        
+        NewListViewController *newlistviewcontroller = [segue destinationViewController];
+        
+        newlistviewcontroller.SequeData = @[@"Update",cell.ListName.text,cell.ListID.text];
+        
+        newlistviewcontroller.Seque_selectedRow = _selectedList;
+        NSLog(@"seque_selectedrow: %@",newlistviewcontroller.Seque_selectedRow);
+        
+        //[self performSegueWithIdentifier:@"ShowUpdateList" sender:_cell];
     }
-    
     
 }
 

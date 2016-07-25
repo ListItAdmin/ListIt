@@ -37,6 +37,16 @@
     // Do any additional setup after loading the view.
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    // Do any additional setup after loading the view.
+    self.NewList.text = _SequeData[1];
+    
+    //set title of screen to the List Name
+    [self setTitle:@"Update List"];
+}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -64,13 +74,13 @@
     //!!!!
     
     
-    if ([_SequeData[0] isEqualToString:@"ShowUpdateList"]) {
+    if ([_SequeData[0] isEqualToString:@"Update"]) {
         
         //update core data
         
         NSLog(@"SequeData[0] = %@", _SequeData[0]);
         NSLog(@"New name: %@", self.NewList.text);
-        [_SequeData setValue:self.NewList.text forKey:@"name"];
+        [_Seque_selectedRow setValue:self.NewList.text forKey:@"listName"];
     } else {
         NSManagedObject *List = [NSEntityDescription insertNewObjectForEntityForName:@"List" inManagedObjectContext:context];
         
