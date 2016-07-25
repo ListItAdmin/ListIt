@@ -118,9 +118,27 @@
     
     //cell.ListName.text= _Lists[row];
     
+    
     NSManagedObject *listitem = [self.Items objectAtIndex:indexPath.row];
     
+    NSLog(@"status (string): |%@|", [listitem valueForKey:@"itemStatus"]);
+    
     [cell.ItemName setText:[NSString stringWithFormat:@"%@", [listitem valueForKey:@"itemName"]]];
+    
+    NSString *ItemStatus = [NSString stringWithFormat:@"%@", [listitem valueForKey:@"itemStatus"]];
+    
+    int ItemStatus_I = [ItemStatus intValue];
+    
+    NSLog(@"status (not string): |%d|", ItemStatus_I);
+    
+    if (ItemStatus_I == 0) {
+     cell.ItemImage.image = [UIImage imageNamed:@"checkblank.png"];
+    } else if (ItemStatus_I == 1) {
+        cell.ItemImage.image = [UIImage imageNamed:@"checkbox.png"];
+    } else {
+        cell.ItemImage.image = [UIImage imageNamed:@"checkmark.png"];
+    }
+    
     
     //NSString *checkmark = _Checked[row];
     

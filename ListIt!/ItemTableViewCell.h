@@ -10,5 +10,6 @@
 
 @interface ItemTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *ItemName;
+@property (weak, nonatomic) IBOutlet UIImageView *ItemImage;
 
 @end

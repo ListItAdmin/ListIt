@@ -17,6 +17,9 @@
 		5512D6091D3E93C2008529F5 /* ListIt_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5512D6081D3E93C2008529F5 /* ListIt_Tests.m */; };
 		5512D6141D3E93C2008529F5 /* ListIt_UITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5512D6131D3E93C2008529F5 /* ListIt_UITests.m */; };
 		558430E21D414FA5007AB861 /* NewItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 558430E11D414FA5007AB861 /* NewItemViewController.m */; };
+		559111011D42B7610022B6B3 /* checkblank.png in Resources */ = {isa = PBXBuildFile; fileRef = 559110FE1D42B7610022B6B3 /* checkblank.png */; };
+		559111021D42B7610022B6B3 /* checkbox.png in Resources */ = {isa = PBXBuildFile; fileRef = 559110FF1D42B7610022B6B3 /* checkbox.png */; };
+		559111031D42B7610022B6B3 /* checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 559111001D42B7610022B6B3 /* checkmark.png */; };
 		94EA2A611D3EA6E50042E977 /* ListsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94EA2A601D3EA6E50042E977 /* ListsViewController.m */; };
 		94EA2A641D3EB7140042E977 /* ListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94EA2A631D3EB7140042E977 /* ListTableViewCell.m */; };
 		94EA2A671D3FE84A0042E977 /* ItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94EA2A661D3FE84A0042E977 /* ItemViewController.m */; };
@@ -62,6 +65,9 @@
 		5512D6151D3E93C2008529F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		558430E01D414FA5007AB861 /* NewItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewItemViewController.h; sourceTree = "<group>"; };
 		558430E11D414FA5007AB861 /* NewItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewItemViewController.m; sourceTree = "<group>"; };
+		559110FE1D42B7610022B6B3 /* checkblank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkblank.png; sourceTree = "<group>"; };
+		559110FF1D42B7610022B6B3 /* checkbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkbox.png; sourceTree = "<group>"; };
+		559111001D42B7610022B6B3 /* checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkmark.png; sourceTree = "<group>"; };
 		94EA2A5F1D3EA6E50042E977 /* ListsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListsViewController.h; sourceTree = "<group>"; };
 		94EA2A601D3EA6E50042E977 /* ListsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListsViewController.m; sourceTree = "<group>"; };
 		94EA2A621D3EB7140042E977 /* ListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListTableViewCell.h; sourceTree = "<group>"; };
@@ -147,6 +153,7 @@
 				5512D5FC1D3E93C2008529F5 /* LaunchScreen.storyboard */,
 				5512D5FF1D3E93C2008529F5 /* Info.plist */,
 				5512D5F71D3E93C2008529F5 /* ListIt_.xcdatamodeld */,
+				559110FD1D42B6F40022B6B3 /* Images */,
 				5512D5EB1D3E93C2008529F5 /* Supporting Files */,
 			);
 			path = "ListIt!";
@@ -176,6 +183,16 @@
 				5512D6151D3E93C2008529F5 /* Info.plist */,
 			);
 			path = "ListIt!UITests";
+			sourceTree = "<group>";
+		};
+		559110FD1D42B6F40022B6B3 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				559110FE1D42B7610022B6B3 /* checkblank.png */,
+				559110FF1D42B7610022B6B3 /* checkbox.png */,
+				559111001D42B7610022B6B3 /* checkmark.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -281,9 +298,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				559111021D42B7610022B6B3 /* checkbox.png in Resources */,
 				5512D5FE1D3E93C2008529F5 /* LaunchScreen.storyboard in Resources */,
 				5512D5FB1D3E93C2008529F5 /* Assets.xcassets in Resources */,
 				5512D5F61D3E93C2008529F5 /* Main.storyboard in Resources */,
+				559111011D42B7610022B6B3 /* checkblank.png in Resources */,
+				559111031D42B7610022B6B3 /* checkmark.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
