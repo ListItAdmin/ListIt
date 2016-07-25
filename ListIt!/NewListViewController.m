@@ -70,7 +70,7 @@
         
         NSLog(@"SequeData[0] = %@", _SequeData[0]);
         NSLog(@"New name: %@", self.NewList.text);
-        [_SequeData[0] setValue:self.NewList.text forKey:@"name"];
+        [_SequeData setValue:self.NewList.text forKey:@"name"];
     } else {
         NSManagedObject *List = [NSEntityDescription insertNewObjectForEntityForName:@"List" inManagedObjectContext:context];
         

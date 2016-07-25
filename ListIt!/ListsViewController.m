@@ -172,25 +172,23 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     //!!!!!!
-    NSManagedObject *selectedRow = [self.Lists objectAtIndex:indexPath.row];
-    // save selected list item to pass to Update view contoller
-    _selectedList = selectedRow;
-    
-    NSLog(@"******SELECTED ROW: %@",[_selectedList valueForKey:@"listName"]);
-    
-    
-    
-    //!!!!!!!!!
-    //NSString *nameSelected = [_InterestingNames objectAtIndex:indexPath.row];
-    
-    //NSString *msg = [NSString stringWithFormat:@"You have selected %@", nameSelected];
-    //UIAlertView *alert =[[UIAlertView alloc] initWithTitle:@"Player selected" message:msg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    
-    //[alert show];
-    
-    //!!!!!!!
-    //UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-    //[self performSegueWithIdentifier:@"ShowDetail" sender:cell];
+    if(self.tableView.isEditing){
+        
+        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+        [self performSegueWithIdentifier:@"ShowUpdateList" sender:cell];
+        
+    } else {
+        
+        NSManagedObject *selectedRow = [self.Lists objectAtIndex:indexPath.row];
+        // save selected list item to pass to Update view contoller
+        _selectedList = selectedRow;
+        
+        NSLog(@"******SELECTED ROW: %@",[_selectedList valueForKey:@"listName"]);
+        
+        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+        [self performSegueWithIdentifier:@"Same" sender:cell];
+    }
+
 }
 
 
