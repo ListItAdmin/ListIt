@@ -38,6 +38,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    [self checkFirstTime];
+
+    
     //set title of screen to the List Name
     [self setTitle:@"Lists"];
     
@@ -76,6 +79,50 @@
     // Do any additional setup after loading the view.
     
     [self loadTableView];
+}
+
+- (void)checkFirstTime {
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"hasPerformedFirstLaunch"]) {
+        // On first launch, this block will execute
+        
+        NSLog(@"First time launching...");
+        
+        // Set the "hasPerformedFirstLaunch" key so this block won't execute again
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"hasPerformedFirstLaunch"];
+        
+        // setup database connection
+        NSManagedObjectContext *context = [self managedObjectContext];
+        
+        
+        // set up d
+        NSManagedObject *List = [NSEntityDescription insertNewObjectForEntityForName:@"List" inManagedObjectContext:context];
+        
+        [List setValue:[NSNumber numberWithInteger:0] forKey:@"listid"];
+        [List setValue:[NSString stringWithFormat:@"Sample List"] forKey:@"listName"];
+        //[List setValue:[NSString stringWithFormat:@""] forKey:@"creationDate"];
+        [List setValue:[NSNumber numberWithInteger:0] forKey:@"listCounter"];
+        
+        // set up data
+        NSManagedObject *Item = [NSEntityDescription insertNewObjectForEntityForName:@"Items" inManagedObjectContext:context];
+        
+        [Item setValue:[NSNumber numberWithInteger:0] forKey:@"listid"];
+        [Item setValue:[NSNumber numberWithInteger:0] forKey:@"itemid"];
+        [Item setValue:[NSString stringWithFormat:@"Sample Item"] forKey:@"itemName"];
+        [Item setValue:[NSNumber numberWithInteger:0] forKey:@"itemStatus"];
+        //[List setValue:[NSString stringWithFormat:@"Rebel"] forKey:@"faction"];
+        //[List setValue:[NSString stringWithFormat:@"Blue Lightsaber"] forKey:@"weapon"];
+        //[List setValue:[NSString stringWithFormat:@"Human"] forKey:@"race"];
+        
+        NSError *error = nil;
+        // Save the object to persistent store
+        if (![context save:&error]) {
+            NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+        }
+        
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    } else {
+        NSLog(@"Not first time launching...");
+    }
 }
 
 - (void)didReceiveMemoryWarning {
