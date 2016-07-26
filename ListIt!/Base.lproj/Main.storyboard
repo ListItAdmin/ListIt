@@ -55,7 +55,6 @@
                                         <connections>
                                             <outlet property="ListID" destination="Ahb-c0-3MW" id="BtD-3U-6x6"/>
                                             <outlet property="ListName" destination="qRV-3V-q9O" id="eFT-Nj-xwr"/>
-                                            <segue destination="ywy-dx-6D0" kind="show" identifier="Same" id="wm2-hJ-aOp"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -77,13 +76,14 @@
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="tableView" destination="366-Pf-VYG" id="JSX-zu-QC2"/>
+                        <outlet property="tableView" destination="366-Pf-VYG" id="ehq-Kk-Pls"/>
                         <segue destination="OqF-cX-m6W" kind="show" identifier="ShowUpdateList" id="EbV-t9-Rg6"/>
+                        <segue destination="ywy-dx-6D0" kind="show" identifier="Same" id="yjd-F5-4rp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="831" y="721"/>
+            <point key="canvasLocation" x="837" y="706"/>
         </scene>
         <!--Utility View Controller-->
         <scene sceneID="b46-8c-CkN">
@@ -279,7 +279,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UN9-k0-c3N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1275" y="744"/>
+            <point key="canvasLocation" x="1299" y="751"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="V34-qY-ZG7">
@@ -302,7 +302,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="yjd-F5-4rp"/>
         <segue reference="EbV-t9-Rg6"/>
-        <segue reference="wm2-hJ-aOp"/>
     </inferredMetricsTieBreakers>
 </document>

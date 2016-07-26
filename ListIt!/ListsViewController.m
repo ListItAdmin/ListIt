@@ -16,7 +16,6 @@
 
 @property (strong, nonatomic) NSManagedObject *selectedList;
 @property (strong) NSMutableArray *fetchResults;
-@property (strong) UITableViewCell *cell;
 
 @end
 
@@ -180,9 +179,13 @@
     
     //!!!!!!
     if(self.tableView.isEditing){
+        NSManagedObject *selectedRow = [self.Lists objectAtIndex:indexPath.row];
+        // save selected list item to pass to Update view contoller
+        _selectedList = selectedRow;
         
-        self.cell = [self.tableView cellForRowAtIndexPath:indexPath];
-        [self performSegueWithIdentifier:@"ShowUpdateList" sender:_cell];
+        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+        
+        [self performSegueWithIdentifier:@"ShowUpdateList" sender:cell];
         
     } else {
         
@@ -192,8 +195,8 @@
         
         NSLog(@"******SELECTED ROW: %@",[_selectedList valueForKey:@"listName"]);
         
-        self.cell = [self.tableView cellForRowAtIndexPath:indexPath];
-        //[self performSegueWithIdentifier:@"Same" sender:cell];
+        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+        [self performSegueWithIdentifier:@"Same" sender:cell];
     }
 
 }
