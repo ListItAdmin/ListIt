@@ -75,18 +75,22 @@
 
 - (void)loadTableView
 {
-    
     NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
     
+    //get items from the database that have the checkbox and checkmark
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Items"];
-    
-    NSString *listid = [NSString stringWithFormat:@"(listid == %@)", _SequeData[1]];
-    NSPredicate *pred = [NSPredicate predicateWithFormat:listid];
-    
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"((listid = %@) AND (itemStatus != 0))", _SequeData[1]];
     [fetchRequest setPredicate:pred];
     self.Items = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
-    
     NSLog(@"Self.Items: %@", self.Items);
+    
+    //get items from the database that have no checkbox or checkmark
+    NSFetchRequest *blankFetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Items"];
+    NSPredicate *pred1 = [NSPredicate predicateWithFormat:@"((listid = %@) AND (itemStatus = 0))", _SequeData[1]];
+    [blankFetchRequest setPredicate:pred1];
+    self.blankItems = [[managedObjectContext executeFetchRequest:blankFetchRequest error:nil] mutableCopy];
+    NSLog(@"Self.blankItems: %@", self.blankItems);
+    
     
     [self.tableView reloadData];
     
@@ -118,14 +122,19 @@
     
     //cell.ListName.text= _Lists[row];
     
+    NSString *ItemStatus;
     
-    NSManagedObject *listitem = [self.Items objectAtIndex:indexPath.row];
-    
-    NSLog(@"status (string): |%@|", [listitem valueForKey:@"itemStatus"]);
-    
-    [cell.ItemName setText:[NSString stringWithFormat:@"%@", [listitem valueForKey:@"itemName"]]];
-    
-    NSString *ItemStatus = [NSString stringWithFormat:@"%@", [listitem valueForKey:@"itemStatus"]];
+    if (indexPath.section == 0) {
+        NSManagedObject *listitem = [self.Items objectAtIndex:indexPath.row];
+        NSLog(@"status (string): |%@|", [listitem valueForKey:@"itemStatus"]);
+        [cell.ItemName setText:[NSString stringWithFormat:@"%@", [listitem valueForKey:@"itemName"]]];
+        ItemStatus = [NSString stringWithFormat:@"%@", [listitem valueForKey:@"itemStatus"]];
+    } else {
+        NSManagedObject *listitem = [self.blankItems objectAtIndex:indexPath.row];
+        NSLog(@"status (string): |%@|", [listitem valueForKey:@"itemStatus"]);
+        [cell.ItemName setText:[NSString stringWithFormat:@"%@", [listitem valueForKey:@"itemName"]]];
+        ItemStatus = [NSString stringWithFormat:@"%@", [listitem valueForKey:@"itemStatus"]];
+    }
     
     int ItemStatus_I = [ItemStatus intValue];
     
@@ -147,6 +156,44 @@
     
     return cell;
 }
+
+//*******************************************
+// User Select-a-row
+//*******************************************
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    ItemTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    NSManagedObjectContext *context = [self managedObjectContext];
+    //!!!!!!
+    NSManagedObject *selectedRow;
+    if (indexPath.section == 0) {
+        selectedRow = [self.Items objectAtIndex:indexPath.row];
+    } else {
+        selectedRow = [self.blankItems objectAtIndex:indexPath.row];
+    }
+    NSString *ItemStatus = [selectedRow valueForKey: @"itemStatus"];
+    
+    int ItemStatus_I = [ItemStatus intValue];
+    
+    NSLog(@"status (not string): |%d|", ItemStatus_I);
+    
+    if (ItemStatus_I == 0) {
+        cell.ItemImage.image = [UIImage imageNamed:@"checkbox.png"];
+        [selectedRow setValue:[NSNumber numberWithInteger:1] forKey:@"itemStatus"];
+    } else if (ItemStatus_I == 1) {
+        cell.ItemImage.image = [UIImage imageNamed:@"checkmark.png"];
+        [selectedRow setValue:[NSNumber numberWithInteger:2] forKey:@"itemStatus"];
+    } else {
+        cell.ItemImage.image = [UIImage imageNamed:@"checkblank.png"];
+        [selectedRow setValue:[NSNumber numberWithInteger:0] forKey:@"itemStatus"];
+    }
+    NSError *error = nil;
+    if (![context save:&error]) {
+        NSLog(@"Can't Delete! %@ %@", error, [error localizedDescription]);
+        return;
+    }
+    [self loadTableView];
+}
+
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -172,13 +219,17 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return self.Items.count;
+    if (section == 0) {
+         return self.Items.count;
+    } else {
+        return self.blankItems.count;
+    }
     
     
 }
