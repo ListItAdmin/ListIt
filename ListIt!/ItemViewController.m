@@ -13,6 +13,8 @@
 
 @interface ItemViewController ()
 
+@property (strong, nonatomic) NSManagedObject *selectedItem;
+
 @end
 
 @implementation ItemViewController
@@ -161,37 +163,53 @@
 // User Select-a-row
 //*******************************************
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    ItemTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    NSManagedObjectContext *context = [self managedObjectContext];
+    
     //!!!!!!
-    NSManagedObject *selectedRow;
-    if (indexPath.section == 0) {
-        selectedRow = [self.Items objectAtIndex:indexPath.row];
+    if(self.tableView.isEditing){
+        NSManagedObject *selectedRow = [self.Items objectAtIndex:indexPath.row];
+        // save selected list item to pass to Update view contoller
+        _selectedItem = selectedRow;
+        
+        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+        
+        [self performSegueWithIdentifier:@"ShowUpdateItem" sender:cell];
+        
     } else {
-        selectedRow = [self.blankItems objectAtIndex:indexPath.row];
+        
+        ItemTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        NSManagedObjectContext *context = [self managedObjectContext];
+        //!!!!!!
+        NSManagedObject *selectedRow;
+        if (indexPath.section == 0) {
+            selectedRow = [self.Items objectAtIndex:indexPath.row];
+        } else {
+            selectedRow = [self.blankItems objectAtIndex:indexPath.row];
+        }
+        NSString *ItemStatus = [selectedRow valueForKey: @"itemStatus"];
+        
+        int ItemStatus_I = [ItemStatus intValue];
+        
+        NSLog(@"status (not string): |%d|", ItemStatus_I);
+        
+        if (ItemStatus_I == 0) {
+            cell.ItemImage.image = [UIImage imageNamed:@"checkbox.png"];
+            [selectedRow setValue:[NSNumber numberWithInteger:1] forKey:@"itemStatus"];
+        } else if (ItemStatus_I == 1) {
+            cell.ItemImage.image = [UIImage imageNamed:@"checkmark.png"];
+            [selectedRow setValue:[NSNumber numberWithInteger:2] forKey:@"itemStatus"];
+        } else {
+            cell.ItemImage.image = [UIImage imageNamed:@"checkblank.png"];
+            [selectedRow setValue:[NSNumber numberWithInteger:0] forKey:@"itemStatus"];
+        }
+        NSError *error = nil;
+        if (![context save:&error]) {
+            NSLog(@"Can't Delete! %@ %@", error, [error localizedDescription]);
+            return;
+        }
+        
+        [self loadTableView];
+
     }
-    NSString *ItemStatus = [selectedRow valueForKey: @"itemStatus"];
-    
-    int ItemStatus_I = [ItemStatus intValue];
-    
-    NSLog(@"status (not string): |%d|", ItemStatus_I);
-    
-    if (ItemStatus_I == 0) {
-        cell.ItemImage.image = [UIImage imageNamed:@"checkbox.png"];
-        [selectedRow setValue:[NSNumber numberWithInteger:1] forKey:@"itemStatus"];
-    } else if (ItemStatus_I == 1) {
-        cell.ItemImage.image = [UIImage imageNamed:@"checkmark.png"];
-        [selectedRow setValue:[NSNumber numberWithInteger:2] forKey:@"itemStatus"];
-    } else {
-        cell.ItemImage.image = [UIImage imageNamed:@"checkblank.png"];
-        [selectedRow setValue:[NSNumber numberWithInteger:0] forKey:@"itemStatus"];
-    }
-    NSError *error = nil;
-    if (![context save:&error]) {
-        NSLog(@"Can't Delete! %@ %@", error, [error localizedDescription]);
-        return;
-    }
-    [self loadTableView];
 }
 
 
@@ -281,15 +299,9 @@
 //*******************************************
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    
-    //if ([[segue identifier] isEqualToString:@"ShowListItems"]) {
-    
     NewItemViewController *newitemviewcontroller = [segue destinationViewController];
     
     newitemviewcontroller.SequeData = @[_SequeData[1]];
-    
-    //}
-    
     
 }
 
