@@ -195,13 +195,53 @@
 }
 
 
+//*******************************************
+// User Delete-a-row
+//*******************************************
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSManagedObjectContext *context = [self managedObjectContext];
+    NSManagedObject *selectedRow;
+    ItemTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    NSString *ItemStatus = [selectedRow valueForKey: @"itemStatus"];
+    
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete object from database
-        [context deleteObject:[self.Items objectAtIndex:indexPath.row]];
+        //[context deleteObject:[self.Items objectAtIndex:indexPath.row]];
+        
+        NSString *ItemStatus;
+        
+        if (indexPath.section == 0) {
+            NSManagedObject *listitem = [self.Items objectAtIndex:indexPath.row];
+            NSLog(@"status (string): |%@|", [listitem valueForKey:@"itemStatus"]);
+            [cell.ItemName setText:[NSString stringWithFormat:@"%@", [listitem valueForKey:@"itemName"]]];
+            ItemStatus = [NSString stringWithFormat:@"%@", [listitem valueForKey:@"itemStatus"]];
+        } else {
+            NSManagedObject *listitem = [self.blankItems objectAtIndex:indexPath.row];
+            NSLog(@"status (string): |%@|", [listitem valueForKey:@"itemStatus"]);
+            [cell.ItemName setText:[NSString stringWithFormat:@"%@", [listitem valueForKey:@"itemName"]]];
+            ItemStatus = [NSString stringWithFormat:@"%@", [listitem valueForKey:@"itemStatus"]];
+        }
+        
+        int ItemStatus_I = [ItemStatus intValue];
+        
+        if (ItemStatus_I == 0) {
+            [context deleteObject:[self.blankItems objectAtIndex:indexPath.row]];
+            [self.blankItems removeObjectAtIndex:indexPath.row];
+            [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        } else if (ItemStatus_I == 1) {
+            [context deleteObject:[self.Items objectAtIndex:indexPath.row]];
+            [self.Items removeObjectAtIndex:indexPath.row];
+            [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        } else if (ItemStatus_I == 2){
+            [context deleteObject:[self.Items objectAtIndex:indexPath.row]];
+            [self.Items removeObjectAtIndex:indexPath.row];
+            [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            //[self.Items removeObjectAtIndex:indexPath.row];
+        } else {
+            NSLog(@"HAHAHAHAHHAHAHAHA YOU JUST GOT REKT BWAHAHAHAHAHA");
+        }
         
         NSError *error = nil;
         if (![context save:&error]) {
@@ -209,9 +249,11 @@
             return;
         }
         
+        NSLog(@"Self.blankItems: %lu", (unsigned long)self.blankItems.count);
+        NSLog(@"Self.Items: %lu", (unsigned long)self.Items.count);
+        
         // Remove device from table view
-        [self.Items removeObjectAtIndex:indexPath.row];
-        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        //[self.Items removeObjectAtIndex:indexPath.row];
     }
 }
 
