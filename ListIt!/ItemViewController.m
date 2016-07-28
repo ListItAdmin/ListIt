@@ -14,6 +14,7 @@
 @interface ItemViewController ()
 
 @property (strong, nonatomic) NSManagedObject *selectedItem;
+@property NSString *SegueItemID;
 
 @end
 
@@ -93,7 +94,6 @@
     self.blankItems = [[managedObjectContext executeFetchRequest:blankFetchRequest error:nil] mutableCopy];
     NSLog(@"Self.blankItems: %@", self.blankItems);
     
-    
     [self.tableView reloadData];
     
     
@@ -164,13 +164,33 @@
 //*******************************************
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    NSLog(@"CHECK POINT");
+    
     //!!!!!!
     if(self.tableView.isEditing){
-        NSManagedObject *selectedRow = [self.Items objectAtIndex:indexPath.row];
+        NSLog(@"CHECK POINT");
+        
+        //NSManagedObject *selectedRow = [self.Items objectAtIndex:indexPath.row];
+        NSManagedObject *selectedRow;
         // save selected list item to pass to Update view contoller
-        _selectedItem = selectedRow;
+        
+        NSLog(@"CHECK POINT");
+        
+        if (indexPath.section == 0) {
+            selectedRow = [self.Items objectAtIndex:indexPath.row];
+            _selectedItem = selectedRow;
+        } else {
+            selectedRow = [self.blankItems objectAtIndex:indexPath.row];
+            _selectedItem = selectedRow;
+        }
+        NSLog(@"CHECK POINT");
+        NSString *ItemID = [selectedRow valueForKey: @"itemid"];
+        
+        _SegueItemID = ItemID;
         
         UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+        
+        NSLog(@"CHECK POINT");
         
         [self performSegueWithIdentifier:@"ShowUpdateItem" sender:cell];
         
@@ -221,14 +241,14 @@
     NSManagedObjectContext *context = [self managedObjectContext];
     NSManagedObject *selectedRow;
     ItemTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    NSString *ItemStatus = [selectedRow valueForKey: @"itemStatus"];
+    
     
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete object from database
         //[context deleteObject:[self.Items objectAtIndex:indexPath.row]];
         
-        NSString *ItemStatus;
+        NSString *ItemStatus = [selectedRow valueForKey: @"itemStatus"];
         
         if (indexPath.section == 0) {
             NSManagedObject *listitem = [self.Items objectAtIndex:indexPath.row];
@@ -299,9 +319,24 @@
 //*******************************************
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    NewItemViewController *newitemviewcontroller = [segue destinationViewController];
+    if ([[segue identifier] isEqualToString:@"ShowUpdateItem"]){
+        
+        NSIndexPath *myIndexPath = [self.tableView indexPathForSelectedRow];
+        ItemTableViewCell *cell = [self.tableView cellForRowAtIndexPath:myIndexPath];
+        
+        NewItemViewController *newitemviewcontroller = [segue destinationViewController];
+        
+        newitemviewcontroller.SequeData = @[@"Update",cell.ItemName.text,cell.ItemID.text,_SequeData[1],_SegueItemID];
+        
+        NSLog(@"SequqData[0] prepareForSegue: %@", newitemviewcontroller.SequeData[0]);
+        
+        newitemviewcontroller.Seque_selectedRow = _selectedItem;
+        NSLog(@"seque_selectedrow: %@",newitemviewcontroller.Seque_selectedRow);
+    }
     
-    newitemviewcontroller.SequeData = @[_SequeData[1]];
+    //NewItemViewController *newitemviewcontroller = [segue destinationViewController];
+    
+    //newitemviewcontroller.SequeData = @[_SequeData[1]];
     
 }
 

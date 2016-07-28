@@ -58,17 +58,28 @@
 - (IBAction)SaveItem:(id)sender {
     // setup database connection
     NSManagedObjectContext *context = [self managedObjectContext];
-    NSNumber *Test = [self GoGetIt];
     
-    // set up data
-    NSManagedObject *List = [NSEntityDescription insertNewObjectForEntityForName:@"Items" inManagedObjectContext:context];
+    NSLog(@"SequeData[0] = %@", _SequeData[0]);
     
-    NSString *string = _SequeData[0];
-    NSInteger number=[string intValue];
-    
-    [List setValue:[NSNumber numberWithInteger:number] forKey:@"listid"];
-    [List setValue:[NSNumber numberWithInteger:[Test intValue]] forKey:@"itemid"];
-    [List setValue:[NSString stringWithFormat:@"%@", self.SaveText.text] forKey:@"itemName"];
+    if ([_SequeData[0] isEqualToString:@"Update"]) {
+        //update core data
+        
+        //int ItemID = [_SequeData[5] intValue];
+        
+        NSLog(@"SequeData[0] = %@", _SequeData[0]);
+        NSLog(@"New name: %@", self.SaveText.text);
+        NSLog(@"Seque_selectedRow: %@", _Seque_selectedRow);
+        [_Seque_selectedRow setValue:self.SaveText.text forKey:@"itemName"];
+    } else {
+        NSManagedObject *Item = [NSEntityDescription insertNewObjectForEntityForName:@"Items" inManagedObjectContext:context];
+        NSNumber *Test = [self GoGetIt];
+        NSString *string = _SequeData[3];
+        NSInteger number=[string intValue];
+        
+        [Item setValue:[NSNumber numberWithInteger:number] forKey:@"listid"];
+        [Item setValue:[NSNumber numberWithInteger:[Test intValue]] forKey:@"itemid"];
+        [Item setValue:[NSString stringWithFormat:@"%@", self.SaveText.text] forKey:@"itemName"];
+    }
 
     NSError *error = nil;
     // Save the object to persistent store
