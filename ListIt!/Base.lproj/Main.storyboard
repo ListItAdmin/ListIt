@@ -129,6 +129,12 @@
                                     <segue destination="ywy-dx-6D0" kind="show" id="IVK-1w-dye"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M3n-jx-c5z">
+                                <rect key="frame" x="199" y="250" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -322,7 +328,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="yjd-F5-4rp"/>
-        <segue reference="EbV-t9-Rg6"/>
-        <segue reference="qA8-Lr-4k6"/>
+        <segue reference="gqu-N6-lbH"/>
+        <segue reference="n0w-oc-xmi"/>
     </inferredMetricsTieBreakers>
 </document>
