@@ -10,6 +10,7 @@
 #import "ItemTableViewCell.h"
 #import <CoreData/CoreData.h>
 #import "NewItemViewController.h"
+#import "SelectViewController.h"
 
 @interface ItemViewController ()
 
@@ -332,6 +333,10 @@
         
         newitemviewcontroller.Seque_selectedRow = _selectedItem;
         NSLog(@"seque_selectedrow: %@",newitemviewcontroller.Seque_selectedRow);
+    } else if ([[segue identifier] isEqualToString:@"ShowSelect"]) {
+        SelectViewController *selectviewcontroller = [segue destinationViewController];
+        
+        selectviewcontroller.SequeData = @[_SequeData[0], _SequeData[1]];
     } else {
         NewItemViewController *newitemviewcontroller = [segue destinationViewController];
         
