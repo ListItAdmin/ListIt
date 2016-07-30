@@ -10,6 +10,10 @@
 
 @interface ListsViewController : UIViewController
 @property (nonatomic, strong) NSMutableArray *Lists;
+@property (nonatomic, strong) NSMutableArray *Items;
+@property (nonatomic, strong) NSMutableArray *blankItems;
+@property (nonatomic, strong) NSMutableArray *something;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+- (IBAction)Copy:(UIButton *)sender;
 
 @end

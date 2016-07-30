@@ -73,7 +73,7 @@
     } else {
         NSManagedObject *Item = [NSEntityDescription insertNewObjectForEntityForName:@"Items" inManagedObjectContext:context];
         NSNumber *Test = [self GoGetIt];
-        NSString *string = _SequeData[3];
+        NSString *string = _SequeData[0];
         NSInteger number=[string intValue];
         
         [Item setValue:[NSNumber numberWithInteger:number] forKey:@"listid"];

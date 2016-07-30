@@ -16,6 +16,7 @@
 
 @property (strong, nonatomic) NSManagedObject *selectedList;
 @property (strong) NSMutableArray *fetchResults;
+@property BOOL isCopying;
 
 @end
 
@@ -42,6 +43,8 @@
     
     [self checkFirstTime];
 
+    _isCopying = NO;
+    NSLog(@"isCopying = %d",_isCopying);
     
     //set title of screen to the List Name
     [self setTitle:@"Lists"];
@@ -54,8 +57,6 @@
     
     //change color of table view separator lines
     [self.tableView setSeparatorColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:1]];
-    
-    
     
     //_Lists = [[NSMutableArray alloc] init];
     //[_Lists addObject:@"Waterpolo"];
@@ -183,6 +184,9 @@
     
 }
 
+//*******************************************
+// Load table view
+//*******************************************
 - (void)loadTableView
 {
     
@@ -192,6 +196,8 @@
     self.Lists = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
     
     NSLog(@"Self.Lists: %@", self.Lists);
+    
+    _isCopying = NO;
     
     [self.tableView reloadData];
     
@@ -224,6 +230,8 @@
 //*******************************************
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    NSLog(@"isCopying = %d",_isCopying);
+    
     //!!!!!!
     if(self.tableView.isEditing){
         NSManagedObject *selectedRow = [self.Lists objectAtIndex:indexPath.row];
@@ -233,6 +241,86 @@
         UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
         
         [self performSegueWithIdentifier:@"ShowUpdateList" sender:cell];
+        
+    } else if(_isCopying == YES){
+      
+        NSLog(@"IS COPYING");
+        
+        NSManagedObjectContext *context = [self managedObjectContext];
+        NSIndexPath *myIndexPath = [self.tableView indexPathForSelectedRow];
+        ListTableViewCell *cell = [self.tableView cellForRowAtIndexPath:myIndexPath];
+        NSManagedObject *List = [NSEntityDescription insertNewObjectForEntityForName:@"List" inManagedObjectContext:context];
+        
+        NSNumber *Test = [self GoGetIt];
+        
+        [List setValue:[NSNumber numberWithInteger: [Test intValue]] forKey:@"listid"];
+        [List setValue:[NSString stringWithFormat:@"%@ Copy", cell.ListName.text] forKey:@"listName"];
+
+        NSError *error = nil;
+        // Save the object to persistent store
+        if (![context save:&error]) {
+            NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+            
+        }
+        
+        [self loadTableView];
+        
+        NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
+        
+        NSNumber *something = 0;
+        
+        //get items from the database that have the checkbox and checkmark
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Items"];
+        NSPredicate *pred = [NSPredicate predicateWithFormat:@"((listid = %@) AND (itemStatus != 0))", something];
+        [fetchRequest setPredicate:pred];
+        self.Items = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+        NSLog(@"Self.Items: %@", self.Items);
+        
+        //get items from the database that have no checkbox or checkmark
+        NSFetchRequest *blankFetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Items"];
+        NSPredicate *pred1 = [NSPredicate predicateWithFormat:@"((listid = %@) AND (itemStatus = 0))", something];
+        [blankFetchRequest setPredicate:pred1];
+        self.blankItems = [[managedObjectContext executeFetchRequest:blankFetchRequest error:nil] mutableCopy];
+        NSLog(@"Self.blankItems: %@", self.blankItems);
+        
+        //NSManagedObject *Item = [NSEntityDescription insertNewObjectForEntityForName:@"Items" inManagedObjectContext:context];
+        
+        //NSString *string =ç cell.ListID.text;
+        
+        for(int i = 0; i < self.Items.count; i++){
+            
+            NSManagedObject *Item = [NSEntityDescription insertNewObjectForEntityForName:@"Items" inManagedObjectContext:context];
+            NSInteger number=[Test intValue];
+            [Item setValue:[NSNumber numberWithInteger:number] forKey:@"listid"];
+            [Item setValue:[NSNumber numberWithInteger:[Test intValue]] forKey:@"itemid"];
+            [Item setValue:[NSString stringWithFormat:@"%@", self.Items] forKey:@"itemName"];
+            
+            NSError *error = nil;
+            // Save the object to persistent store
+            if (![context save:&error]) {
+                NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+                
+            }
+        }
+        
+        for(int i = 0; i < self.blankItems.count; i++){
+            
+            NSManagedObject *Item = [NSEntityDescription insertNewObjectForEntityForName:@"Items" inManagedObjectContext:context];
+            NSInteger number=[Test intValue];
+            [Item setValue:[NSNumber numberWithInteger:number] forKey:@"listid"];
+            [Item setValue:[NSNumber numberWithInteger:[Test intValue]] forKey:@"itemid"];
+            [Item setValue:[NSString stringWithFormat:@"%@", self.Items] forKey:@"itemName"];
+            
+            NSError *error = nil;
+            // Save the object to persistent store
+            if (![context save:&error]) {
+                NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+                
+            }
+        }
+        
+        
+
         
     } else {
         
@@ -246,6 +334,44 @@
         [self performSegueWithIdentifier:@"Same" sender:cell];
     }
 
+}
+
+- (NSNumber *) GoGetIt {
+    //establish database connection
+    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"List"];
+    //self.fetchResults = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+    
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"listid"
+                                                                   ascending:YES];
+    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    
+    self.fetchResults = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+    
+    
+    //get the thingy from the datathingy
+    NSLog(@"Number of Records Found: %lu", (unsigned long)[self.fetchResults count]);
+    
+    NSLog(@"*MAX List ID: %@", [[self.fetchResults objectAtIndex:[self.fetchResults count]-1] valueForKey:@"listid"]);
+    
+    NSInteger i;
+    
+    NSString *nextCharID  =[[self.fetchResults objectAtIndex:[self.fetchResults count]-1] valueForKey:@"listid"];
+    
+    //increment the charid
+    i = [nextCharID integerValue];
+    
+    i = i+1;
+    
+    NSNumber *myNum = @(i);
+    NSLog(@"This is myNum: %@", myNum);
+    //nextCharID = [NSString stringWithFormat:@"%ld", (long)i];
+    
+    //return it BOIS
+    return myNum;
+    
 }
 
 
@@ -301,4 +427,10 @@
 }
 */
 
+- (IBAction)Copy:(UIButton *)sender {
+    
+    NSLog(@"Set Copying to YES");
+    _isCopying = YES;
+    
+}
 @end

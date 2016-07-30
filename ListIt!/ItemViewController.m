@@ -128,7 +128,7 @@
     
     if (indexPath.section == 0) {
         NSManagedObject *listitem = [self.Items objectAtIndex:indexPath.row];
-        NSLog(@"status (string): |%@|", [listitem valueForKey:@"itemStatus"]);
+        NSLog(@"status (string): 4|%@|", [listitem valueForKey:@"itemStatus"]);
         [cell.ItemName setText:[NSString stringWithFormat:@"%@", [listitem valueForKey:@"itemName"]]];
         ItemStatus = [NSString stringWithFormat:@"%@", [listitem valueForKey:@"itemStatus"]];
     } else {
@@ -171,7 +171,7 @@
         NSLog(@"CHECK POINT");
         
         //NSManagedObject *selectedRow = [self.Items objectAtIndex:indexPath.row];
-        NSManagedObject *selectedRow;
+        NSManagedObject *selectedRow;		
         // save selected list item to pass to Update view contoller
         
         NSLog(@"CHECK POINT");
@@ -332,6 +332,10 @@
         
         newitemviewcontroller.Seque_selectedRow = _selectedItem;
         NSLog(@"seque_selectedrow: %@",newitemviewcontroller.Seque_selectedRow);
+    } else {
+        NewItemViewController *newitemviewcontroller = [segue destinationViewController];
+        
+        newitemviewcontroller.SequeData = @[_SequeData[1]];
     }
     
     //NewItemViewController *newitemviewcontroller = [segue destinationViewController];
