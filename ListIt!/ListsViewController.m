@@ -10,12 +10,14 @@
 #import "ListTableViewCell.h"
 #import "ItemViewController.h"
 #import "NewListViewController.h"
+#import "ItemTableViewCell.h"
 #import <CoreData/CoreData.h>
 
 @interface ListsViewController ()
 
 @property (strong, nonatomic) NSManagedObject *selectedList;
 @property (strong) NSMutableArray *fetchResults;
+@property (strong, nonatomic) NSManagedObject *selectedItem;
 @property BOOL isCopying;
 
 @end
@@ -211,6 +213,35 @@
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete object from database
+        NSManagedObject *listitem;
+        
+        listitem = [self.Lists objectAtIndex:indexPath.row];
+        
+        NSString *listid = [listitem valueForKey:@"listid"];
+
+        
+        NSIndexPath *myIndexPath = [self.tableView indexPathForSelectedRow];
+        ListTableViewCell *cell = [self.tableView cellForRowAtIndexPath:myIndexPath];
+        NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
+        
+        //get items from the database that have the checkbox and checkmark
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Items"];
+        NSLog(@"THIS IS A MESSAGE :/ %@",listid);
+        NSPredicate *pred = [NSPredicate predicateWithFormat:@"((listid = %@))", listid];
+        [fetchRequest setPredicate:pred];
+        self.Items = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+        NSLog(@"Self.Items: %lu", (unsigned long)self.Items.count);
+
+        for (int i = 0; i < self.Items.count; i++) {
+            [context deleteObject:[self.Items objectAtIndex:i]];
+            
+            NSError *error = nil;
+            if (![context save:&error]) {
+                NSLog(@"Can't Delete! %@ %@", error, [error localizedDescription]);
+                return;
+            }
+        }
+        
         [context deleteObject:[self.Lists objectAtIndex:indexPath.row]];
         
         NSError *error = nil;
@@ -218,6 +249,10 @@
             NSLog(@"Can't Delete! %@ %@", error, [error localizedDescription]);
             return;
         }
+        
+        //NSLog(@"Self.blankItems: %lu", (unsigned long)self.blankItems.count);
+        //NSLog(@"Self.Items: %lu", (unsigned long)self.Items.count);
+
         
         // Remove device from table view
         [self.Lists removeObjectAtIndex:indexPath.row];
