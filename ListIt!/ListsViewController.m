@@ -254,7 +254,7 @@
         NSNumber *Test = [self GoGetIt];
         
         [List setValue:[NSNumber numberWithInteger: [Test intValue]] forKey:@"listid"];
-        [List setValue:[NSString stringWithFormat:@"%@ Copy", cell.ListName.text] forKey:@"listName"];
+        [List setValue:[NSString stringWithFormat:@"%@ (Copy)", cell.ListName.text] forKey:@"listName"];
 
         NSError *error = nil;
         // Save the object to persistent store
