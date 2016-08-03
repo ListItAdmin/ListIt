@@ -184,4 +184,10 @@
     
 }
 
+- (IBAction)alert{
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"GOTCHU" message:@"hey babe" delegate:nil cancelButtonTitle:@"i'm coming" otherButtonTitles:nil, nil];
+    [alert show];
+    //[alert release];
+}
+
 @end

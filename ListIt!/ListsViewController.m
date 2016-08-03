@@ -267,61 +267,48 @@
         
         NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
         
-        NSNumber *something = 0;
+        //NSNumber *something = 0;
         
         //get items from the database that have the checkbox and checkmark
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Items"];
-        NSPredicate *pred = [NSPredicate predicateWithFormat:@"((listid = %@) AND (itemStatus != 0))", something];
+        NSPredicate *pred = [NSPredicate predicateWithFormat:@"((listid = %@))", cell.ListID.text];
         [fetchRequest setPredicate:pred];
         self.Items = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
-        NSLog(@"Self.Items: %@", self.Items);
-        
-        //get items from the database that have no checkbox or checkmark
-        NSFetchRequest *blankFetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Items"];
-        NSPredicate *pred1 = [NSPredicate predicateWithFormat:@"((listid = %@) AND (itemStatus = 0))", something];
-        [blankFetchRequest setPredicate:pred1];
-        self.blankItems = [[managedObjectContext executeFetchRequest:blankFetchRequest error:nil] mutableCopy];
-        NSLog(@"Self.blankItems: %@", self.blankItems);
+        NSLog(@"Self.Items: %lu", (unsigned long)self.Items.count);
         
         //NSManagedObject *Item = [NSEntityDescription insertNewObjectForEntityForName:@"Items" inManagedObjectContext:context];
         
         //NSString *string =ç cell.ListID.text;
         
-        for(int i = 0; i < self.Items.count; i++){
+        NSManagedObject *listitem;
+        NSManagedObject *newListitem;
+        
+        // Copy each list item from selected list to new copy list
+        for (int i = 0; i < self.Items.count; i++) {
             
-            NSManagedObject *Item = [NSEntityDescription insertNewObjectForEntityForName:@"Items" inManagedObjectContext:context];
-            NSInteger number=[Test intValue];
-            [Item setValue:[NSNumber numberWithInteger:number] forKey:@"listid"];
-            [Item setValue:[NSNumber numberWithInteger:[Test intValue]] forKey:@"itemid"];
-            [Item setValue:[NSString stringWithFormat:@"%@", self.Items] forKey:@"itemName"];
             
-            NSError *error = nil;
-            // Save the object to persistent store
+            newListitem = [NSEntityDescription insertNewObjectForEntityForName:@"Items" inManagedObjectContext:context];
+            
+            [newListitem setValue:[NSNumber numberWithInteger:[Test intValue]] forKey:@"listid"];
+            
+            listitem = [self.Items objectAtIndex:i ];
+            
+            
+            NSString *listItemName = [listitem valueForKey:@"itemName"];
+            
+            [newListitem setValue:listItemName forKey:@"itemName"];
+            
+            NSString *checkeditem = [listitem valueForKey:@"itemStatus"];
+            int checkeditem_I = [checkeditem intValue];
+            [newListitem setValue:[NSNumber numberWithInteger:checkeditem_I] forKey:@"itemStatus"];
+            
+            // Execute query
             if (![context save:&error]) {
-                NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
-                
+                NSLog(@"Can't Execute! %@ %@", error, [error localizedDescription]);
             }
-        }
-        
-        for(int i = 0; i < self.blankItems.count; i++){
             
-            NSManagedObject *Item = [NSEntityDescription insertNewObjectForEntityForName:@"Items" inManagedObjectContext:context];
-            NSInteger number=[Test intValue];
-            [Item setValue:[NSNumber numberWithInteger:number] forKey:@"listid"];
-            [Item setValue:[NSNumber numberWithInteger:[Test intValue]] forKey:@"itemid"];
-            [Item setValue:[NSString stringWithFormat:@"%@", self.Items] forKey:@"itemName"];
-            
-            NSError *error = nil;
-            // Save the object to persistent store
-            if (![context save:&error]) {
-                NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
-                
-            }
         }
-        
-        
-
-        
+    
     } else {
         
         NSManagedObject *selectedRow = [self.Lists objectAtIndex:indexPath.row];
@@ -374,6 +361,43 @@
     
 }
 
+- (NSNumber *) ItemGoGetIt {
+    //establish database connection
+    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Items"];
+    //self.fetchResults = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+    
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"itemid"
+                                                                   ascending:YES];
+    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    
+    self.fetchResults = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+    
+    
+    //get the thingy from the datathingy
+    NSLog(@"Number of Records Found: %lu", (unsigned long)[self.fetchResults count]);
+    
+    NSLog(@"*MAX List ID: %@", [[self.fetchResults objectAtIndex:[self.fetchResults count]-1] valueForKey:@"itemid"]);
+    
+    NSInteger i;
+    
+    NSString *nextCharID  =[[self.fetchResults objectAtIndex:[self.fetchResults count]-1] valueForKey:@"itemid"];
+    
+    //increment the charid
+    i = [nextCharID integerValue];
+    
+    i = i+1;
+    
+    NSNumber *myNum = @(i);
+    NSLog(@"This is myNum: %@", myNum);
+    //nextCharID = [NSString stringWithFormat:@"%ld", (long)i];
+    
+    //return it BOIS
+    return myNum;
+    
+}
 
 //*******************************************
 // Pass Data to Items View Controller
