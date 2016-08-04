@@ -14,6 +14,8 @@
 @property (nonatomic, strong) NSMutableArray *blankItems;
 @property (nonatomic, strong) NSMutableArray *something;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *AddButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *EditButton;
 - (IBAction)Copy:(UIButton *)sender;
 
 @end

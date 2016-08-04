@@ -40,10 +40,17 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     // Do any additional setup after loading the view.
-    self.NewList.text = _SequeData[1];
-    
-    //set title of screen to the List Name
-    [self setTitle:@"Update List"];
+    if ([_SequeData[0] isEqualToString:@"Update"]) {
+        self.NewList.text = _SequeData[1];
+        
+        //set title of screen to the List Name
+        [self setTitle:@"Update List"];
+    } else {
+        self.NewList.text = @"New List";
+        
+        //set title of screen to the List Name
+        [self setTitle:@"Create New List"];
+    }
 }
 
 
