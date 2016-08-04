@@ -147,7 +147,7 @@
     
     // Configure the cell...
     
-    //int row = [indexPath row];
+    /*int row = [indexPath row];
     
     cell.ListName.text= _Lists[row];*/
     
@@ -447,9 +447,9 @@
         NSIndexPath *myIndexPath = [self.tableView indexPathForSelectedRow];
         
         
-        //int row = (int)[myIndexPath row];
+        /*int row = (int)[myIndexPath row];
         
-        //NSString *selectedRow = [NSString stringWithFormat:@"%d", row];
+        NSString *selectedRow = [NSString stringWithFormat:@"%d", row];*/
         
         
         ListTableViewCell *cell = [self.tableView cellForRowAtIndexPath:myIndexPath];

@@ -19,6 +19,7 @@
 - (IBAction)ResetButton:(id)sender;
 - (IBAction)CancelButton:(id)sender;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+- (IBAction)SelectAllButton:(id)sender;
 @property (strong, nonatomic) NSArray *SequeData;
 
 @end

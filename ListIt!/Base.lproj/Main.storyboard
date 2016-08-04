@@ -51,7 +51,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ahb-c0-3MW">
+                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ahb-c0-3MW">
                                                     <rect key="frame" x="202" y="7" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -289,16 +289,9 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mUv-nQ-SUH">
-                                                    <rect key="frame" x="234" y="11" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="ItemID" destination="mUv-nQ-SUH" id="h3S-rW-sHJ"/>
                                             <outlet property="ItemImage" destination="Uoc-7U-pr1" id="bm7-5s-PZa"/>
                                             <outlet property="ItemName" destination="beS-0J-aMi" id="mbC-wc-ONW"/>
                                         </connections>
@@ -349,21 +342,21 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lZU-RR-oHW">
                                 <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                                 <items>
-                                    <barButtonItem title="Check" id="BtX-ja-2IX">
-                                        <connections>
-                                            <action selector="CheckButton:" destination="VfS-HQ-x6n" id="59v-Sd-N1s"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem width="58" style="plain" systemItem="fixedSpace" id="wKL-HV-Cq4"/>
                                     <barButtonItem title="Uncheck" id="Hsy-B9-nHC">
                                         <connections>
                                             <action selector="UncheckButton:" destination="VfS-HQ-x6n" id="LcK-or-NpZ"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem width="61" style="plain" systemItem="fixedSpace" id="4AL-VC-O0u"/>
+                                    <barButtonItem width="58" style="plain" systemItem="fixedSpace" id="wKL-HV-Cq4"/>
                                     <barButtonItem title="Reset" id="br8-q2-yfd">
                                         <connections>
                                             <action selector="ResetButton:" destination="VfS-HQ-x6n" id="zmi-ys-zDX"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem width="61" style="plain" systemItem="fixedSpace" id="4AL-VC-O0u"/>
+                                    <barButtonItem title="Check" id="BtX-ja-2IX">
+                                        <connections>
+                                            <action selector="CheckButton:" destination="VfS-HQ-x6n" id="59v-Sd-N1s"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -408,6 +401,11 @@
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="fO9-Zk-9HM">
                             <connections>
                                 <action selector="CancelButton:" destination="VfS-HQ-x6n" id="Lgn-Ym-FVq"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Select All" id="dQh-hs-mA0">
+                            <connections>
+                                <action selector="SelectAllButton:" destination="VfS-HQ-x6n" id="CdH-5t-7rN"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

@@ -127,7 +127,7 @@
     
     // Configure the cell...
     
-    //int row = [indexPath row];
+    /*int row = [indexPath row];
     
     cell.ListName.text= _Lists[row];*/
     
@@ -413,5 +413,20 @@
 
 - (IBAction)CancelButton:(id)sender {
     [self.navigationController popViewControllerAnimated:NO];
+}
+- (IBAction)SelectAllButton:(id)sender {
+    for (int a = 0; a < (self.Items.count); a++) {
+        NSIndexPath *myIP = [NSIndexPath indexPathForRow:a inSection:0];
+        SelectTableViewCell *cell = [self.tableView cellForRowAtIndexPath:myIP];
+        cell.backgroundColor = [UIColor colorWithRed:(34/255.0) green:(125/255.0) blue:(255/255.0) alpha:1];
+        [_Selected replaceObjectAtIndex:a withObject:@YES];
+    }
+    for (int a = 0; a < (self.blankItems.count); a++) {
+        NSIndexPath *myIP = [NSIndexPath indexPathForRow:a inSection:1];
+        SelectTableViewCell *cell = [self.tableView cellForRowAtIndexPath:myIP];
+        cell.backgroundColor = [UIColor colorWithRed:(34/255.0) green:(125/255.0) blue:(255/255.0) alpha:1];
+        [_Selected replaceObjectAtIndex:(a + self.Items.count) withObject:@YES];
+    }
+
 }
 @end
