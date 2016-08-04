@@ -147,7 +147,7 @@
     
     // Configure the cell...
     
-    int row = [indexPath row];
+    //int row = [indexPath row];
     
     //cell.ListName.text= _Lists[row];
     
@@ -220,8 +220,8 @@
         NSString *listid = [listitem valueForKey:@"listid"];
 
         
-        NSIndexPath *myIndexPath = [self.tableView indexPathForSelectedRow];
-        ListTableViewCell *cell = [self.tableView cellForRowAtIndexPath:myIndexPath];
+        //NSIndexPath *myIndexPath = [self.tableView indexPathForSelectedRow];
+        //ListTableViewCell *cell = [self.tableView cellForRowAtIndexPath:myIndexPath];
         NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
         
         //get items from the database that have the checkbox and checkmark
@@ -447,9 +447,9 @@
         NSIndexPath *myIndexPath = [self.tableView indexPathForSelectedRow];
         
         
-        int row = [myIndexPath row];
+        //int row = (int)[myIndexPath row];
         
-        NSString *selectedRow = [NSString stringWithFormat:@"%d", row];
+        //NSString *selectedRow = [NSString stringWithFormat:@"%d", row];
         
         
         ListTableViewCell *cell = [self.tableView cellForRowAtIndexPath:myIndexPath];
