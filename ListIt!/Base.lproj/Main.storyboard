@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Lists View Controller-->
@@ -17,12 +18,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zYG-BL-Xfc">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zYG-BL-Xfc">
                                 <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                                 <items>
                                     <barButtonItem style="plain" id="vBT-vo-PPP">
-                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="voo-WL-hQk">
-                                            <rect key="frame" x="16" y="7" width="36" height="30"/>
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="voo-WL-hQk">
+                                            <rect key="frame" x="16" y="7" width="64" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" title="Copy"/>
                                             <connections>
@@ -76,6 +77,9 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="zYG-BL-Xfc" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottomMargin" id="owc-9N-5id"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="TZV-fO-cif">
                         <barButtonItem key="leftBarButtonItem" systemItem="edit" id="m16-a2-kio"/>
@@ -87,6 +91,8 @@
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="AddButton" destination="6Wo-ff-Ubv" id="IZ4-zw-h2A"/>
+                        <outlet property="EditButton" destination="m16-a2-kio" id="NEo-3U-EAA"/>
                         <outlet property="tableView" destination="366-Pf-VYG" id="ehq-Kk-Pls"/>
                         <segue destination="OqF-cX-m6W" kind="show" identifier="ShowUpdateList" id="EbV-t9-Rg6"/>
                         <segue destination="ywy-dx-6D0" kind="show" identifier="Same" id="yjd-F5-4rp"/>
@@ -241,7 +247,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vcN-uU-pUu">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vcN-uU-pUu">
                                 <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                                 <items>
                                     <barButtonItem title="Back" id="1rI-hX-hku">
@@ -299,6 +305,9 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="vcN-uU-pUu" firstAttribute="bottom" secondItem="I3s-Q9-rU6" secondAttribute="bottomMargin" id="jxj-oT-AHz"/>
+                        </constraints>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="W1p-cp-bid">
@@ -426,8 +435,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="gqu-N6-lbH"/>
         <segue reference="yjd-F5-4rp"/>
+        <segue reference="gqu-N6-lbH"/>
         <segue reference="n0w-oc-xmi"/>
     </inferredMetricsTieBreakers>
 </document>

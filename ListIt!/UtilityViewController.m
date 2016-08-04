@@ -185,9 +185,15 @@
 }
 
 - (IBAction)alert{
-    /*UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"GOTCHU" message:@"hey babe" delegate:nil cancelButtonTitle:@"i'm coming" otherButtonTitles:nil, nil];
-    [alert show];
-    //[alert release];*/
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"My Alert"
+                                                                   message:@"This is an alert."
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action) {}];
+    
+    [alert addAction:defaultAction];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 @end

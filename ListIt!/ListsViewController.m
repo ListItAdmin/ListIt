@@ -488,8 +488,38 @@
 
 - (IBAction)Copy:(UIButton *)sender {
     
-    NSLog(@"Set Copying to YES");
-    _isCopying = YES;
+    if (sender.selected == NO) {
+        
+        [sender setTitle:@"Cancel" forState:UIControlStateNormal];
+        sender.selected = YES;
+        
+        NSLog(@"Set Copying to YES");
+        _isCopying = YES;
+        
+        self.editButtonItem.enabled = NO;
+        self.AddButton.enabled = NO;
+        
+        /*UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Copy"
+                                                                       message:@"Select a List to copy"
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                              handler:^(UIAlertAction * action) {}];
+        
+        [alert addAction:defaultAction];
+        [self presentViewController:alert animated:YES completion:nil];*/
+        
+    } else if(sender.selected == YES){
+        
+        [sender setTitle:@"Copy" forState:UIControlStateNormal];
+        sender.selected = NO;
+        
+        NSLog(@"Set Copying to NO");
+        _isCopying = NO;
+        
+        self.editButtonItem.enabled = YES;
+        self.AddButton.enabled = YES;
+    }
     
 }
 @end
