@@ -41,7 +41,7 @@
     NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
     
     //set title of screen to the List Name
-    [self setTitle:@"SelectItems"];
+    [self setTitle:@"Items"];
     
     //add Edit button to Navigation button bar
     //self.navigationItem.leftBarButtonItem = self.editButtonItem;
@@ -127,7 +127,7 @@
     
     // Configure the cell...
     
-    int row = [indexPath row];
+    //int row = [indexPath row];
     
     //cell.ListName.text= _Lists[row];
     

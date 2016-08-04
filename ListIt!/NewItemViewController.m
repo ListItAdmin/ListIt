@@ -56,39 +56,7 @@
 */
 
 - (IBAction)SaveItem:(id)sender {
-    // setup database connection
-    NSManagedObjectContext *context = [self managedObjectContext];
-    
-    NSLog(@"SequeData[0] = %@", _SequeData[0]);
-    
-    if ([_SequeData[0] isEqualToString:@"Update"]) {
-        //update core data
-        
-        //int ItemID = [_SequeData[5] intValue];
-        
-        NSLog(@"SequeData[0] = %@", _SequeData[0]);
-        NSLog(@"New name: %@", self.SaveText.text);
-        NSLog(@"Seque_selectedRow: %@", _Seque_selectedRow);
-        [_Seque_selectedRow setValue:self.SaveText.text forKey:@"itemName"];
-    } else {
-        NSManagedObject *Item = [NSEntityDescription insertNewObjectForEntityForName:@"Items" inManagedObjectContext:context];
-        NSNumber *Test = [self GoGetIt];
-        NSString *string = _SequeData[0];
-        NSInteger number=[string intValue];
-        
-        [Item setValue:[NSNumber numberWithInteger:number] forKey:@"listid"];
-        [Item setValue:[NSNumber numberWithInteger:[Test intValue]] forKey:@"itemid"];
-        [Item setValue:[NSString stringWithFormat:@"%@", self.SaveText.text] forKey:@"itemName"];
-    }
-
-    NSError *error = nil;
-    // Save the object to persistent store
-    if (![context save:&error]) {
-        NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
-        
-    }
-    //close VC and go back
-    [self.navigationController popViewControllerAnimated:YES];
+    [self SaveThingy];
     
 }
 
@@ -130,5 +98,47 @@
     
 }
 
+
+- (void) SaveThingy {
+    
+    // setup database connection
+    NSManagedObjectContext *context = [self managedObjectContext];
+    
+    NSLog(@"SequeData[0] = %@", _SequeData[0]);
+    
+    if ([_SequeData[0] isEqualToString:@"Update"]) {
+        //update core data
+        
+        //int ItemID = [_SequeData[5] intValue];
+        
+        NSLog(@"SequeData[0] = %@", _SequeData[0]);
+        NSLog(@"New name: %@", self.SaveText.text);
+        NSLog(@"Seque_selectedRow: %@", _Seque_selectedRow);
+        [_Seque_selectedRow setValue:self.SaveText.text forKey:@"itemName"];
+    } else {
+        NSManagedObject *Item = [NSEntityDescription insertNewObjectForEntityForName:@"Items" inManagedObjectContext:context];
+        NSNumber *Test = [self GoGetIt];
+        NSString *string = _SequeData[0];
+        NSInteger number=[string intValue];
+        
+        [Item setValue:[NSNumber numberWithInteger:number] forKey:@"listid"];
+        [Item setValue:[NSNumber numberWithInteger:[Test intValue]] forKey:@"itemid"];
+        [Item setValue:[NSString stringWithFormat:@"%@", self.SaveText.text] forKey:@"itemName"];
+    }
+    
+    NSError *error = nil;
+    // Save the object to persistent store
+    if (![context save:&error]) {
+        NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+        
+    }
+    //close VC and go back
+    [self.navigationController popViewControllerAnimated:YES];
+    
+}
+
+- (IBAction)ReturnButton:(id)sender {
+    [self SaveThingy];
+}
 @end
 

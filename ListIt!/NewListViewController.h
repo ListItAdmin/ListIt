@@ -14,5 +14,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *NewList;
 @property (strong, nonatomic) NSArray *SequeData;
 @property (strong, nonatomic) NSManagedObject *Seque_selectedRow;
+- (IBAction)ReturnButton:(id)sender;
 
 @end
