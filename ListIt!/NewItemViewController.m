@@ -35,6 +35,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //,.asasd
     if ([_SequeData[0] isEqualToString:@"Update"]) {
         self.SaveText.text = _SequeData[1];
         
