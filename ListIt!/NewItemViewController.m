@@ -35,9 +35,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
-    NSLog(@"list id: %@", _SequeData[0]);
+    if ([_SequeData[0] isEqualToString:@"Update"]) {
+        self.SaveText.text = _SequeData[1];
+        
+        //set title of screen to the List Name
+        [self setTitle:@"Update List"];
+    } else {
+        self.SaveText.text = @"New Item";
+        
+        //set title of screen to the List Name
+        [self setTitle:@"Create New List"];
+    }
+
 }
 
 - (void)didReceiveMemoryWarning {

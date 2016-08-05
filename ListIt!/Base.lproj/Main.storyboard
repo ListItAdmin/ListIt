@@ -289,9 +289,16 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3db-IB-F4m">
+                                                    <rect key="frame" x="234" y="13" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="ItemID" destination="3db-IB-F4m" id="XN9-zJ-P2Y"/>
                                             <outlet property="ItemImage" destination="Uoc-7U-pr1" id="bm7-5s-PZa"/>
                                             <outlet property="ItemName" destination="beS-0J-aMi" id="mbC-wc-ONW"/>
                                         </connections>
@@ -439,8 +446,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="yjd-F5-4rp"/>
         <segue reference="gqu-N6-lbH"/>
+        <segue reference="yjd-F5-4rp"/>
         <segue reference="n0w-oc-xmi"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -320,13 +320,20 @@
 //*******************************************
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
+    NSLog(@"Inside prepareforSegue");
+    
     if ([[segue identifier] isEqualToString:@"ShowUpdateItem"]){
+        
+        NSLog(@"Inside ShowUpdateItem");
         
         NSIndexPath *myIndexPath = [self.tableView indexPathForSelectedRow];
         ItemTableViewCell *cell = [self.tableView cellForRowAtIndexPath:myIndexPath];
         
         NewItemViewController *newitemviewcontroller = [segue destinationViewController];
         
+        NSLog(@"Inside ShowUpdateItem");
+        
+        //newitemviewcontroller.SequeData = @[@"Update",cell.ItemName.text,cell.ItemID.text,_SequeData[1]];
         newitemviewcontroller.SequeData = @[@"Update",cell.ItemName.text,cell.ItemID.text,_SequeData[1],_SegueItemID];
         
         NSLog(@"SequqData[0] prepareForSegue: %@", newitemviewcontroller.SequeData[0]);
