@@ -127,9 +127,6 @@
     
     // Configure the cell...
     
-    /*int row = [indexPath row];
-    
-    cell.ListName.text= _Lists[row];*/
     
     NSString *ItemStatus;
     
@@ -171,38 +168,7 @@
 //*******************************************
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    /* SelectTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-     NSManagedObjectContext *context = [self managedObjectContext];
-     //!!!!!!
-     NSManagedObject *selectedRow;
-     
-     NSString *ItemStatus = [selectedRow valueForKey: @"itemStatus"];
-     
-     int ItemStatus_I = [ItemStatus intValue];
-     
-     NSLog(@"status (not string): |%d|", ItemStatus_I);
-     
-     if (ItemStatus_I == 0) {
-     cell.ItemImage.image = [UIImage imageNamed:@"checkbox.png"];
-     [selectedRow setValue:[NSNumber numberWithInteger:1] forKey:@"itemStatus"];
-     } else if (ItemStatus_I == 1) {
-     cell.ItemImage.image = [UIImage imageNamed:@"checkmark.png"];
-     [selectedRow setValue:[NSNumber numberWithInteger:2] forKey:@"itemStatus"];
-     } else {
-     cell.ItemImage.image = [UIImage imageNamed:@"checkblank.png"];
-     [selectedRow setValue:[NSNumber numberWithInteger:0] forKey:@"itemStatus"];
-     }
-     NSError *error = nil;
-     if (![context save:&error]) {
-     NSLog(@"Can't Delete! %@ %@", error, [error localizedDescription]);
-     return;
-     }*/
     
-    //SelectTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    //cell.backgroundColor = [UIColor colorWithRed:(234/255.0) green:(125/255.0) blue:(155/255.0) alpha:1];
-    
-    //NSIndexPath *myIndexPath = [self.tableView indexPathForSelectedRow];
-    //int row = (int)[myIndexPath row];
     int row = (int)indexPath.row;
     NSLog (@"SelectedRow[%d]:|%@|",row,_Selected[row]);
     NSLog (@"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Number of Items: %lu", (unsigned long)_Selected.count);
@@ -236,7 +202,7 @@
     }
     [self.tableView reloadData];
     
-    // [self loadTableView];
+    
 }
 
 
