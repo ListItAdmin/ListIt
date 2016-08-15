@@ -75,7 +75,7 @@
     NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Items"];
-    //self.fetchResults = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+    
     
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"itemid"
                                                                    ascending:YES];
@@ -101,9 +101,8 @@
     
     NSNumber *myNum = @(i);
     NSLog(@"This is myNum: %@", myNum);
-    //nextCharID = [NSString stringWithFormat:@"%ld", (long)i];
     
-    //return it BOIS
+    
     return myNum;
     
 }
@@ -119,7 +118,7 @@
     if ([_SequeData[0] isEqualToString:@"Update"]) {
         //update core data
         
-        //int ItemID = [_SequeData[5] intValue];
+
         
         NSLog(@"SequeData[0] = %@", _SequeData[0]);
         NSLog(@"New name: %@", self.SaveText.text);

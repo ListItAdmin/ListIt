@@ -93,21 +93,11 @@
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"List"];
     self.fetchResults = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
     
+   //where clause
     //NSPredicate *pred = [NSPredicate predicateWithFormat:@"(charid == 1)"];
-    
     //[fetchRequest setPredicate:pred];
     
-    /*self.fetchResults = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
     
-    NSLog(@"Number of Records Found: %lu", (unsigned long)[self.fetchResults count]);
-    NSLog(@"Retrieved record: %@", self.fetchResults[0]);
-    NSLog(@"Char ID: %@", [[self.fetchResults objectAtIndex:0] valueForKey:@"charid"]);
-    NSLog(@"Name: %@", [[self.fetchResults objectAtIndex:0] valueForKey:@"name"]);
-    NSLog(@"Faction: %@", [[self.fetchResults objectAtIndex:0] valueForKey:@"faction"]);
-    NSLog(@"Weapon: %@", [[self.fetchResults objectAtIndex:0] valueForKey:@"weapon"]);
-    NSLog(@"Race: %@", [[self.fetchResults objectAtIndex:0] valueForKey:@"race"]);
-    NSLog(@"Description: %@", [[self.fetchResults objectAtIndex:0] valueForKey:@"desc"]);*/
-
     
 }
 
@@ -124,9 +114,7 @@
     [List setValue:[NSNumber numberWithInteger:0] forKey:@"itemid"];
     [List setValue:[NSString stringWithFormat:@"tomatoes"] forKey:@"itemName"];
     [List setValue:[NSNumber numberWithInteger:0] forKey:@"itemStatus"];
-    //[List setValue:[NSString stringWithFormat:@"Rebel"] forKey:@"faction"];
-    //[List setValue:[NSString stringWithFormat:@"Blue Lightsaber"] forKey:@"weapon"];
-    //[List setValue:[NSString stringWithFormat:@"Human"] forKey:@"race"];
+
     
     NSManagedObject *List01 = [NSEntityDescription insertNewObjectForEntityForName:@"Items" inManagedObjectContext:context];
     
@@ -134,9 +122,7 @@
     [List01 setValue:[NSNumber numberWithInteger:1] forKey:@"itemid"];
     [List01 setValue:[NSString stringWithFormat:@"carrots"] forKey:@"itemName"];
     [List01 setValue:[NSNumber numberWithInteger:2] forKey:@"itemStatus"];
-    //[List01 setValue:[NSString stringWithFormat:@"Rebel"] forKey:@"faction"];
-    //[List01 setValue:[NSString stringWithFormat:@"Blue Lightsaber"] forKey:@"weapon"];
-    //[List01 setValue:[NSString stringWithFormat:@"Human"] forKey:@"race"];
+    
     
     NSManagedObject *List02 = [NSEntityDescription insertNewObjectForEntityForName:@"Items" inManagedObjectContext:context];
     
@@ -144,10 +130,7 @@
     [List02 setValue:[NSNumber numberWithInteger:2] forKey:@"itemid"];
     [List02 setValue:[NSString stringWithFormat:@"fedoras"] forKey:@"itemName"];
     [List02 setValue:[NSNumber numberWithInteger:1] forKey:@"itemStatus"];
-    //[List02 setValue:[NSString stringWithFormat:@"Rebel"] forKey:@"faction"];
-    //[List02 setValue:[NSString stringWithFormat:@"Blue Lightsaber"] forKey:@"weapon"];
-    //[List02 setValue:[NSString stringWithFormat:@"Human"] forKey:@"race"];
-    
+        
     
     
     
@@ -164,8 +147,8 @@
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Items"];
     self.fetchResults = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
     
+   //where clause
     //NSPredicate *pred = [NSPredicate predicateWithFormat:@"(charid == 1)"];
-    
     //[fetchRequest setPredicate:pred];
     
     self.fetchResults = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
@@ -174,12 +157,7 @@
     NSLog(@"Retrieved record: %@", self.fetchResults[0]);
     NSLog(@"Retrieved record: %@", self.fetchResults[1]);
     NSLog(@"Retrieved record: %@", self.fetchResults[2]);
-    //NSLog(@"List ID: %@", [[self.fetchResults objectAtIndex:0] valueForKey:@"listid"]);
-    //NSLog(@"Item ID: %@", [[self.fetchResults objectAtIndex:0] valueForKey:@"itemid"]);
-    //NSLog(@"Item Name: %@", [[self.fetchResults objectAtIndex:0] valueForKey:@"itemName"]);
-    //NSLog(@"itemStatus: %@", [[self.fetchResults objectAtIndex:0] valueForKey:@"itemStatus"]);
-    //NSLog(@"Race: %@", [[self.fetchResults objectAtIndex:0] valueForKey:@"race"]);
-    //NSLog(@"Description: %@", [[self.fetchResults objectAtIndex:0] valueForKey:@"desc"]);
+  
 
     
 }

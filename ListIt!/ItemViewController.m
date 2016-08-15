@@ -121,9 +121,6 @@
     
     // Configure the cell...
     
-    /*int row = [indexPath row];
-    
-    cell.ListName.text= _Lists[row];*/
     
     NSString *ItemStatus;
     
@@ -152,7 +149,7 @@
     }
     
     
-    //NSString *checkmark = _Checked[row];
+  
     
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
@@ -171,7 +168,7 @@
     if(self.tableView.isEditing){
         NSLog(@"CHECK POINT");
         
-        //NSManagedObject *selectedRow = [self.Items objectAtIndex:indexPath.row];
+
         NSManagedObject *selectedRow;		
         // save selected list item to pass to Update view contoller
         
@@ -277,7 +274,7 @@
             [context deleteObject:[self.Items objectAtIndex:indexPath.row]];
             [self.Items removeObjectAtIndex:indexPath.row];
             [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            //[self.Items removeObjectAtIndex:indexPath.row];
+            
         } else {
             NSLog(@"HAHAHAHAHHAHAHAHA YOU JUST GOT REKT BWAHAHAHAHAHA");
         }
@@ -333,7 +330,7 @@
         
         NSLog(@"Inside ShowUpdateItem");
         
-        //newitemviewcontroller.SequeData = @[@"Update",cell.ItemName.text,cell.ItemID.text,_SequeData[1]];
+        
         newitemviewcontroller.SequeData = @[@"Update",cell.ItemName.text,cell.ItemID.text,_SequeData[1],_SegueItemID];
         
         NSLog(@"SequqData[0] prepareForSegue: %@", newitemviewcontroller.SequeData[0]);
@@ -350,9 +347,7 @@
         newitemviewcontroller.SequeData = @[_SequeData[1]];
     }
     
-    //NewItemViewController *newitemviewcontroller = [segue destinationViewController];
-    
-    //newitemviewcontroller.SequeData = @[_SequeData[1]];
+   
     
 }
 
