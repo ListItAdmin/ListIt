@@ -60,11 +60,6 @@
     //change color of table view separator lines
     [self.tableView setSeparatorColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:1]];
     
-    //_Lists = [[NSMutableArray alloc] init];
-    //[_Lists addObject:@"Waterpolo"];
-    //[_Lists addObject:@"Baseball"];
-    //[_Lists addObject:@"League of Angles --- It's a math game"];
-    
     NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"List"];
@@ -90,6 +85,9 @@
     [self loadTableView];
 }
 
+//***********************************************************************
+// Checks to see if the app is loading for the first time
+//***********************************************************************
 - (void)checkFirstTime {
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"hasPerformedFirstLaunch"]) {
         // On first launch, this block will execute
@@ -139,7 +137,9 @@
     // Dispose of any resources that can be recreated.
 }
 
+//***********************************************************************
 //load data into table view
+//***********************************************************************
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"ListName";
@@ -174,13 +174,10 @@
 {
     // Return the number of rows in the section.
     return self.Lists.count;
-    
-    
 }
 
 - (void) setEditing:(BOOL)editing animated:(BOOL)animated
 {
-    
     [super setEditing:editing animated:animated];
     [self.tableView setEditing:editing animated:animated];
     
@@ -206,7 +203,9 @@
     
 }
 
-
+//*******************************************
+// When the edit button is pressed
+//*******************************************
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSManagedObjectContext *context = [self managedObjectContext];
@@ -358,6 +357,9 @@
 
 }
 
+//*******************************************
+// Create the next index number for the new list
+//*******************************************
 - (NSNumber *) GoGetIt {
     //establish database connection
     NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
@@ -396,6 +398,9 @@
     
 }
 
+//*******************************************
+// Create the next index number for the new item
+//*******************************************
 - (NSNumber *) ItemGoGetIt {
     //establish database connection
     NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
@@ -486,6 +491,9 @@
 }
 */
 
+//*******************************************
+// Sets the app into copy mode
+//*******************************************
 - (IBAction)Copy:(UIButton *)sender {
     
     if (sender.selected == NO) {
@@ -499,6 +507,7 @@
         self.editButtonItem.enabled = NO;
         self.AddButton.enabled = NO;
         
+        //An alert view that lets the user know copy is active
         /*UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Copy"
                                                                        message:@"Select a List to copy"
                                                                 preferredStyle:UIAlertControllerStyleAlert];

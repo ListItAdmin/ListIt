@@ -68,10 +68,17 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+//***********************************************************************
+// Save button method
+//***********************************************************************
 - (IBAction)Save:(UIBarButtonItem *)sender {
     [self SaveThingy];
 }
 
+//*******************************************
+// Create the next index number for the new list
+//*******************************************
 - (NSNumber *) GoGetIt {
     //establish database connection
     NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
@@ -110,19 +117,12 @@
     
 }
 
-
+//***********************************************************************
+// Saves or updates the list
+//***********************************************************************
 - (void) SaveThingy {
     
     NSManagedObjectContext *context = [self managedObjectContext];
-    
-    
-    // NSString *nextCharID = [self gogetnext];
-    
-    //NSInteger *Test = [self TheRealGoGetIt];
-    
-    
-    //!!!!
-    
     
     if ([_SequeData[0] isEqualToString:@"Update"]) {
         
@@ -139,13 +139,6 @@
         [List setValue:[NSNumber numberWithInteger: [Test intValue]] forKey:@"listid"];
         [List setValue:[NSString stringWithFormat:@"%@", self.NewList.text] forKey:@"listName"];
     }
-    
-    /*NSManagedObject *List = [NSEntityDescription insertNewObjectForEntityForName:@"List" inManagedObjectContext:context];
-     
-     NSNumber *Test = [self GoGetIt];
-     
-     [List setValue:[NSNumber numberWithInteger: [Test intValue]] forKey:@"listid"];
-     [List setValue:[NSString stringWithFormat:@"%@", self.NewList.text] forKey:@"listName"];*/
     
     NSError *error = nil;
     // Save the object to persistent store
