@@ -44,9 +44,9 @@
         self.NewList.text = _SequeData[1];
         
         //set title of screen to the List Name
-        [self setTitle:@"Update List"];
+        [self setTitle:@"Update List Name"];
     } else {
-        self.NewList.text = @"New List";
+        self.NewList.text = @"";
         
         //set title of screen to the List Name
         [self setTitle:@"Create New List"];

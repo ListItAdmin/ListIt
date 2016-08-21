@@ -44,7 +44,8 @@
     NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
     
     //set title of screen to the List Name
-    [self setTitle:@"Items"];
+    //[self setTitle:@"Items"];
+    [self setTitle:_SequeData[0]];
     
     //add Edit button to Navigation button bar
     self.navigationItem.leftBarButtonItem = self.editButtonItem;

@@ -49,7 +49,7 @@
     NSLog(@"isCopying = %d",_isCopying);
     
     //set title of screen to the List Name
-    [self setTitle:@"Lists"];
+    [self setTitle:@"My Lists"];
     
     //add Edit button to Navigation button bar
     self.navigationItem.leftBarButtonItem = self.editButtonItem;

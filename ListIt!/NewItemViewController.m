@@ -40,12 +40,12 @@
         self.SaveText.text = _SequeData[1];
         
         //set title of screen to the List Name
-        [self setTitle:@"Update List"];
+        [self setTitle:@"Update Item Name"];
     } else {
-        self.SaveText.text = @"New Item";
+        self.SaveText.text = @"";
         
         //set title of screen to the List Name
-        [self setTitle:@"Create New List"];
+        [self setTitle:@"Create New Item"];
     }
 
 }
